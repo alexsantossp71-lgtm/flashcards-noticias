@@ -164,8 +164,8 @@ function displayPostDetail(post, postId, dateFormatted) {
     const container = document.getElementById('detail-content');
     const date = new Date(post.timestamp * 1000);
     const dateStr = date.toLocaleDateString('pt-BR');
-    const title = post.tiktok_title || post.headline;
-    const summary = post.tiktok_summary || '';
+    const title = post.tiktokTitle || post.headline;
+    const summary = post.tiktokSummary || '';
     container.innerHTML = `
         <div class="bg-gray-800 rounded-2xl p-5 border border-gray-700 mb-4">
             <div class="flex items-center gap-2 mb-3">
@@ -173,7 +173,7 @@ function displayPostDetail(post, postId, dateFormatted) {
                 <span class="text-gray-500 text-sm">📅 ${dateStr}</span>
             </div>
             <h1 class="text-white font-bold text-xl md:text-2xl mb-3">${post.headline}</h1>
-            ${post.tiktok_title ? `
+            ${post.tiktokTitle ? `
             <div class="bg-gray-900 rounded-lg p-4 mb-3 border border-gray-700">
                 <div class="mb-3">
                     <div class="flex items-start justify-between gap-2 mb-2">
