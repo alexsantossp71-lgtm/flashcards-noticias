@@ -1,0 +1,56 @@
+{
+  "id": "geral_20251208_144500",
+  "timestamp": "2025-12-08T14:45:00.870236",
+  "category": "Geral",
+  "headline": "Países da UE aprovam endurecimento da política migratória, apesar de queda nas chegadas",
+  "source": "Mundo",
+  "url": "https://g1.globo.com/mundo/noticia/2025/12/08/paises-ue-aprovam-endurecimento-politica-migratoria.ghtml",
+  "tiktokTitle": "Restrições à Imigração na UE: O que você precisa saber",
+  "tiktokSummary": "Os países da UE aprovaram um endurecimento das normas migratórias, permitindo a criação de centros de retorno fora do bloco para imigrantes cujos pedidos de asilo foram rejeitados. Além disso, haverá sanções mais severas para quem se recusar a deixar o território europeu e a possibilidade de enviar imigrantes para países seguros. As entradas irregulares na UE diminuíram 22%, mas os governos veem este momento como propício para avançar no combate à imigração ilegal. #UE #Imigração #PolíticaMigratória #CentrosDeRetorno #Sanções #DireitosHumanos",
+  "cards": [
+    {
+      "text": "Países da UE aprovam endurecimento da política migratória, apesar de queda nas chegadas",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Ministros do Interior dos 27 Estados-membros aprovaram as medidas apresentadas pela Comissão Europeia, o Executivo do bloco",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Os imigrantes cujos pedidos de asilo foram rejeitados serão enviados para centros fora das fronteiras da UE",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Sanções mais severas serão aplicadas a quem se recusar a deixar o território europeu",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Imigrantes poderão ser enviados para países que não sejam os seus de origem, mas que a Europa considere seguros",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    },
+    {
+      "text": "As entradas irregulares na UE diminuíram 22%, mas os governos veem este momento como propício para avançar no combate à imigração ilegal",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_6.png"
+    },
+    {
+      "text": "Países localizados em importantes rotas migratórias, como Grécia e Itália, poderão receber apoio financeiro dos demais Estados-membros",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_7.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

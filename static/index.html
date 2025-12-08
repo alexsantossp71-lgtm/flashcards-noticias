@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashNews AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 min-h-screen">
+    <!-- Loading -->
+    <div id="loading" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center">
+        <div class="text-center max-w-md w-full px-4">
+            <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-sky-500 mx-auto mb-4"></div>
+            <p id="loading-text" class="text-white text-lg font-semibold mb-2"></p>
+            <p id="loading-step" class="text-gray-400 text-sm mb-4"></p>
+            <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                <div id="progress-bar"
+                    class="bg-gradient-to-r from-sky-500 to-purple-500 h-3 rounded-full transition-all duration-500"
+                    style="width: 0%"></div>
+            </div>
+            <p id="progress-text" class="text-gray-400 text-sm mt-2">0%</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <button onclick="showSavedPosts()" class="text-gray-400 hover:text-sky-400 text-sm">📁 Posts
+                    Salvos</button>
+                <button onclick="location.reload()" class="text-gray-400 hover:text-sky-400 text-sm">🏠 Início</button>
+            </div>
+
+            <!-- Status Indicators -->
+            <div class="flex justify-center gap-4 mb-4 text-xs font-mono">
+                <div class="flex items-center gap-2 px-3 py-1 bg-gray-800 rounded-full border border-gray-700">
+                    <span id="status-backend-dot" class="w-2 h-2 rounded-full bg-red-500"></span>
+                    <span id="status-backend-text" class="text-gray-400">Backend: Off</span>
+                </div>
+                <div class="flex items-center gap-2 px-3 py-1 bg-gray-800 rounded-full border border-gray-700">
+                    <span id="status-ollama-dot" class="w-2 h-2 rounded-full bg-red-500"></span>
+                    <span id="status-ollama-text" class="text-gray-400">Ollama: Off</span>
+                </div>
+            </div>
+
+            <h1
+                class="text-4xl font-bold bg-gradient-to-r from-sky-400 to-purple-500 bg-clip-text text-transparent mb-2">
+                FlashNews AI</h1>
+            <p class="text-gray-400">Transforme notícias em flashcards virais</p>
+        </div>
+
+        <!-- Main Sections -->
+        <div id="main-content">
+            <!-- URL Input -->
+            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-6">
+                <h2 class="text-white font-semibold mb-4">📋 Cole a URL da Notícia</h2>
+                <input type="text" id="url-input" placeholder="https://..."
+                    class="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 mb-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-sky-500 outline-none" />
+                <button onclick="generateFromUrl()"
+                    class="w-full bg-gradient-to-r from-sky-600 to-purple-600 hover:from-sky-500 hover:to-purple-500 text-white font-bold py-3 px-6 rounded-lg transition-all">Gerar
+                    Flashcards</button>
+            </div>
+
+            <!-- Categories -->
+            <div id="categories-section" class="bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-6">
+                <h2 class="text-white font-semibold mb-4">🔥 Ou Busque por Categoria (RSS)</h2>
+                <div class="grid grid-cols-2 gap-3" id="categories"></div>
+            </div>
+
+            <!-- Headlines -->
+            <div id="headlines-section" class="hidden bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-white font-semibold" id="category-title"></h2>
+                    <button onclick="showCategories()" class="text-gray-400 hover:text-white text-sm">← Voltar</button>
+                </div>
+                <div id="headlines-list" class="space-y-3"></div>
+            </div>
+
+            <!-- Styles -->
+            <div id="style-section" class="hidden bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-white font-semibold">🎨 Escolha o Estilo Visual</h2>
+                    <button onclick="showHeadlines()" class="text-gray-400 hover:text-white text-sm">← Voltar</button>
+                </div>
+                <div id="styles-list" class="grid grid-cols-2 gap-3"></div>
+            </div>
+
+            <!-- Results -->
+            <div id="results" class="hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-white font-semibold">✅ Flashcards Gerados</h3>
+                    <div class="flex gap-2">
+                        <button onclick="saveFlashcards()"
+                            class="bg-sky-600 hover:bg-sky-500 text-white px-4 py-2 rounded-lg font-bold text-sm">💾
+                            Salvar</button>
+                        <button onclick="location.reload()" class="text-gray-400 hover:text-white text-sm">←
+                            Nova</button>
+                    </div>
+                </div>
+                <div id="tiktok-metadata" class="bg-gray-800 rounded-2xl p-6 border border-gray-700 mb-6">
+                    <h4 class="text-sky-400 font-bold text-lg mb-2" id="tiktok-title"></h4>
+                    <p class="text-gray-300 text-sm whitespace-pre-line" id="tiktok-summary"></p>
+                </div>
+                <div id="cards-container" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+            </div>
+        </div>
+
+        <!-- Saved Posts -->
+        <div id="saved-posts" class="hidden">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-white font-semibold">📁 Posts Salvos</h3>
+                <button onclick="hideSavedPosts()" class="text-gray-400 hover:text-white text-sm">← Voltar</button>
+            </div>
+            <div id="saved-list" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://127.0.0.1:8000';
+        const CATEGORIES = ['Brasil', 'Mundo', 'Política', 'Esportes', 'Tecnologia', 'Economia'];
+        const STYLES = [
+            { name: '3D Pixar', prompt: '3D Pixar style, colorful, vibrant, cartoon', image: 'assets/style_3d_pixar.png' },
+            { name: 'Realista', prompt: 'photorealistic, high quality, detailed, professional photography', image: 'assets/style_realista.png' },
+            { name: 'Anime', prompt: 'anime style, manga, vibrant colors, detailed', image: 'assets/style_anime.png' },
+            { name: 'Minimalista', prompt: 'minimalist, clean, simple, modern design', image: 'assets/style_minimalista.png' },
+            { name: 'Cyberpunk', prompt: 'cyberpunk style, neon, futuristic, dark', image: 'assets/style_cyberpunk.png' },
+            { name: 'Aquarela', prompt: 'watercolor painting, artistic, soft colors', image: 'assets/style_aquarela.png' }
+        ];
+
+        let selectedHeadline = null;
+        let selectedStyle = null;
+        let currentFlashcards = [];
+
+
+
+        initCategories();
+        checkStatus();
+        setInterval(checkStatus, 30000); // Check every 30s
+
+        async function checkStatus() {
+            const backendDot = document.getElementById('status-backend-dot');
+            const backendText = document.getElementById('status-backend-text');
+            const ollamaDot = document.getElementById('status-ollama-dot');
+            const ollamaText = document.getElementById('status-ollama-text');
+
+            try {
+                const response = await fetch(`${API_URL}/api/status`);
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Backend Online
+                    backendDot.className = 'w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]';
+                    backendText.textContent = 'Backend: On';
+                    backendText.classList.replace('text-gray-400', 'text-green-400');
+
+                    // Ollama Status
+                    if (data.ollama === 'connected') {
+                        ollamaDot.className = 'w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]';
+                        ollamaText.textContent = 'Ollama: On';
+                        ollamaText.classList.replace('text-gray-400', 'text-green-400');
+                    } else {
+                        ollamaDot.className = 'w-2 h-2 rounded-full bg-red-500';
+                        ollamaText.textContent = 'Ollama: Off';
+                        ollamaText.classList.replace('text-green-400', 'text-gray-400');
+                    }
+                } else {
+                    throw new Error('Backend error');
+                }
+            } catch (e) {
+                // Backend Offline
+                backendDot.className = 'w-2 h-2 rounded-full bg-red-500';
+                // Show helpful message
+                backendText.innerHTML = 'Backend: Off <span class="text-[10px] opacity-75 ml-1">(Execute iniciar_flashnews.bat)</span>';
+                backendText.classList.replace('text-green-400', 'text-red-400');
+
+                // Ollama Offline (implied)
+                ollamaDot.className = 'w-2 h-2 rounded-full bg-red-500';
+                ollamaText.textContent = 'Ollama: Unk';
+                ollamaText.classList.replace('text-green-400', 'text-gray-400');
+            }
+        }
+
+        function initCategories() {
+            const container = document.getElementById('categories');
+            CATEGORIES.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = 'p-4 bg-gray-900 hover:bg-gray-700 rounded-lg border border-gray-600 hover:border-sky-500 transition-all text-white font-medium';
+                btn.textContent = cat;
+                btn.onclick = () => fetchHeadlines(cat);
+                container.appendChild(btn);
+            });
+        }
+
+        function showLoading(message, step = '', progress = 0) {
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('loading-text').textContent = message;
+            document.getElementById('loading-step').textContent = step;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '%';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').classList.add('hidden');
+        }
+
+        function showCategories() {
+            document.getElementById('headlines-section').classList.add('hidden');
+            document.getElementById('style-section').classList.add('hidden');
+            document.getElementById('categories-section').classList.remove('hidden');
+        }
+
+        function showHeadlines() {
+            document.getElementById('style-section').classList.add('hidden');
+            document.getElementById('headlines-section').classList.remove('hidden');
+        }
+
+        async function fetchHeadlines(category) {
+            try {
+                showLoading(`Buscando manchetes de ${category}...`);
+                const response = await fetch(`${API_URL}/api/headlines`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ category, count: 10 })
+                });
+                if (!response.ok) throw new Error('Erro ao buscar manchetes');
+
+                const data = await response.json();
+                hideLoading();
+
+                document.getElementById('category-title').textContent = category;
+                const list = document.getElementById('headlines-list');
+                list.innerHTML = '';
+
+                data.headlines.forEach(headline => {
+                    const div = document.createElement('div');
+                    div.className = 'p-4 bg-gray-900 hover:bg-gray-700 rounded-lg border border-gray-600 hover:border-sky-500 transition-all cursor-pointer';
+                    div.innerHTML = `<h3 class="text-white font-medium mb-1">${headline.headline}</h3><p class="text-gray-400 text-sm">${headline.source}</p>`;
+                    div.onclick = () => selectHeadline(headline);
+                    list.appendChild(div);
+                });
+
+                document.getElementById('categories-section').classList.add('hidden');
+                document.getElementById('headlines-section').classList.remove('hidden');
+            } catch (error) {
+                hideLoading();
+                alert('Erro: ' + error.message);
+            }
+        }
+
+        async function selectHeadline(headline) {
+            selectedHeadline = headline;
+            const list = document.getElementById('styles-list');
+            list.innerHTML = '';
+
+            STYLES.forEach(style => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-gray-900 hover:bg-gray-700 rounded-lg border border-gray-600 hover:border-sky-500 transition-all cursor-pointer text-center';
+                div.innerHTML = `<p class="text-white font-medium">${style.name}</p>`;
+                div.onclick = () => selectStyle(style);
+                list.appendChild(div);
+            });
+
+            document.getElementById('headlines-section').classList.add('hidden');
+            document.getElementById('style-section').classList.remove('hidden');
+        }
+
+        function selectStyle(style) {
+            selectedStyle = style;
+            generateFlashcards();
+        }
+
+        async function generateFromUrl() {
+            const url = document.getElementById('url-input').value.trim();
+            if (!url) { alert('Por favor, cole uma URL'); return; }
+
+            try {
+                showLoading('Extraindo informações...');
+                const response = await fetch(`${API_URL}/api/headline-from-url`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+
+                if (!response.ok) throw new Error('Erro ao extrair notícia');
+                selectedHeadline = await response.json();
+                hideLoading();
+
+                selectedStyle = { name: '3D Pixar', prompt: '3D Pixar style, colorful, vibrant' };
+                generateFlashcards();
+            } catch (error) {
+                hideLoading();
+                alert('Erro: ' + error.message);
+            }
+        }
+
+        async function generateFlashcards() {
+            if (!selectedHeadline || !selectedStyle) return;
+
+            try {
+                document.getElementById('categories-section').classList.add('hidden');
+                document.getElementById('headlines-section').classList.add('hidden');
+                document.getElementById('style-section').classList.add('hidden');
+
+                showLoading('Gerando Flashcards', '📰 Copiando notícia...', 5);
+                await new Promise(r => setTimeout(r, 300));
+
+                showLoading('Gerando Flashcards', '🤖 Analisando com IA...', 10);
+                const contentResponse = await fetch(`${API_URL}/api/generate-content`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        headline: selectedHeadline.headline,
+                        url: selectedHeadline.url,
+                        stylePrompt: selectedStyle.prompt,
+                        source: selectedHeadline.source
+                    })
+                });
+
+                if (!contentResponse.ok) throw new Error('Erro ao gerar conteúdo');
+
+                showLoading('Gerando Flashcards', '✍️ Criando legendas...', 20);
+                const content = await contentResponse.json();
+
+                showLoading('Gerando Flashcards', '📝 Estruturando 7 cards...', 30);
+                await new Promise(r => setTimeout(r, 300));
+
+                const flashcards = content.flashcards;
+                const cardsContainer = document.getElementById('cards-container');
+                cardsContainer.innerHTML = '';
+                document.getElementById('results').classList.remove('hidden');
+
+                document.getElementById('tiktok-title').textContent = content.tiktokTitle || '';
+                document.getElementById('tiktok-summary').textContent = content.tiktokSummary || '';
+
+                currentFlashcards = [];
+                const totalCards = flashcards.length;
+
+                for (let i = 0; i < totalCards; i++) {
+                    const card = flashcards[i];
+                    const cardProgress = 30 + ((i / totalCards) * 65);
+
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'aspect-[9/16] bg-gray-800 rounded-lg overflow-hidden relative';
+                    cardDiv.innerHTML = '<div class="w-full h-full flex items-center justify-center"><div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-sky-500"></div></div>';
+                    cardsContainer.appendChild(cardDiv);
+
+                    showLoading('Gerando Flashcards', `🎨 Gerando imagem ${i + 1}/${totalCards}...`, cardProgress);
+
+                    try {
+                        const imageResponse = await fetch(`${API_URL}/api/generate-image`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                prompt: card.imagePrompt,
+                                stylePrompt: selectedStyle.prompt,
+                                text: card.text,
+                                cardNumber: i + 1
+                            })
+                        });
+
+                        if (!imageResponse.ok) throw new Error('Erro ao gerar imagem');
+                        const imageData = await imageResponse.json();
+
+                        showLoading('Gerando Flashcards', `✨ Aplicando texto no card ${i + 1}...`, cardProgress + (65 / totalCards) * 0.8);
+
+                        cardDiv.innerHTML = `<img src="data:image/png;base64,${imageData.imageBase64}" alt="Card ${i + 1}" class="w-full h-full object-cover" />`;
+
+                        currentFlashcards.push({
+                            text: card.text,
+                            imageBase64: imageData.imageBase64
+                        });
+                    } catch (err) {
+                        console.error(`Erro no card ${i + 1}:`, err);
+                        cardDiv.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-red-900/20 text-red-400 text-sm p-2 text-center">Erro</div>';
+                    }
+                }
+
+                showLoading('Concluído!', '✅ Flashcards prontos!', 100);
+                await new Promise(r => setTimeout(r, 1000));
+                hideLoading();
+
+            } catch (error) {
+                hideLoading();
+                alert('Erro: ' + error.message);
+            }
+        }
+
+        async function saveFlashcards() {
+            if (currentFlashcards.length === 0) return;
+
+            try {
+                showLoading('Salvando Post', '💾 Enviando dados para o servidor...', 50);
+
+                const postData = {
+                    category: 'Geral', // Pode ser melhorado para pegar a categoria real
+                    headline: selectedHeadline.headline,
+                    source: selectedHeadline.source,
+                    url: selectedHeadline.url || '',
+                    tiktokTitle: document.getElementById('tiktok-title').textContent,
+                    tiktokSummary: document.getElementById('tiktok-summary').textContent,
+                    cards: currentFlashcards.map((card, index) => ({
+                        text: card.text,
+                        imagePrompt: card.imagePrompt || '', // Garantir que campo exista
+                        imageBase64: card.imageBase64,
+                        imageSource: 'local'
+                    })),
+                    generationTime: 0,
+                    modelUsed: {}
+                };
+
+                const response = await fetch(`${API_URL}/api/save-post`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(postData)
+                });
+
+                if (!response.ok) throw new Error('Erro ao salvar no servidor');
+
+                hideLoading();
+                alert('✅ Flashcards salvos com sucesso!');
+            } catch (error) {
+                hideLoading();
+                console.error(error);
+                alert('Erro ao salvar: ' + error.message);
+            }
+        }
+
+        async function showSavedPosts() {
+            document.getElementById('main-content').classList.add('hidden');
+            document.getElementById('saved-posts').classList.remove('hidden');
+
+            const list = document.getElementById('saved-list');
+            list.innerHTML = '<div class="text-center py-8"><div class="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-sky-500 mx-auto"></div><p class="text-gray-400 mt-2">Carregando posts...</p></div>';
+
+            try {
+                const response = await fetch(`${API_URL}/api/posts`);
+                if (!response.ok) throw new Error('Erro ao buscar posts');
+
+                const data = await response.json();
+                const saved = data.posts;
+
+                list.innerHTML = '';
+
+                if (saved.length === 0) {
+                    list.innerHTML = '<p class="text-gray-400 text-center py-8">Nenhum post salvo ainda</p>';
+                    return;
+                }
+
+                saved.forEach(post => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-gray-800 rounded-2xl p-6 border border-gray-700';
+                    div.innerHTML = `
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-white font-semibold mb-1">${post.headline}</h3>
+                                <p class="text-sky-400 text-xs mb-1">${post.category || 'Geral'}</p>
+                                <p class="text-gray-400 text-sm">${new Date(post.timestamp * 1000).toLocaleDateString('pt-BR')} às ${new Date(post.timestamp * 1000).toLocaleTimeString('pt-BR')}</p>
+                            </div>
+                            <button onclick="deletePost('${post.id}')" class="text-red-400 hover:text-red-300 p-2 hover:bg-red-900/20 rounded transition-colors" title="Excluir">🗑️</button>
+                        </div>
+                         <div class="flex gap-2">
+                             <button onclick="viewPost('${post.id}')" class="flex-1 bg-sky-600 hover:bg-sky-500 text-white py-2 rounded-lg font-bold transition-colors">Visualizar</button>
+                         </div>
+                    `;
+                    list.appendChild(div);
+                });
+
+            } catch (error) {
+                list.innerHTML = `<div class="text-red-400 text-center py-8">Erro ao carregar posts: ${error.message}</div>`;
+            }
+        }
+
+        function hideSavedPosts() {
+            document.getElementById('saved-posts').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+        }
+
+        async function viewPost(id) {
+            try {
+                showLoading('Carregando Post', 'Buscando dados...', 50);
+
+                const response = await fetch(`${API_URL}/api/posts/${id}`);
+                if (!response.ok) throw new Error('Erro ao carregar detalhes do post');
+
+                const post = await response.json();
+                hideLoading();
+
+                document.getElementById('saved-posts').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                document.getElementById('categories-section').classList.add('hidden');
+                document.getElementById('results').classList.remove('hidden');
+
+                document.getElementById('tiktok-title').textContent = post.tiktok_title || post.tiktokTitle || '';
+                document.getElementById('tiktok-summary').textContent = post.tiktok_summary || post.tiktokSummary || '';
+
+                const container = document.getElementById('cards-container');
+                container.innerHTML = '';
+
+                // Try to use imageFullPath if available (fetching from server), else fallback to base64
+                if (post.cards && post.cards.length > 0) {
+                    post.cards.forEach((card, i) => {
+                        const div = document.createElement('div');
+                        div.className = 'aspect-[9/16] bg-gray-800 rounded-lg overflow-hidden relative group';
+
+                        let imgSrc = '';
+                        if (card.imageFullPath) {
+                            // Use the endpoint to serve the image
+                            imgSrc = `${API_URL}/api/image/${id}/${i + 1}`;
+                        } else if (card.imageBase64) {
+                            imgSrc = `data:image/png;base64,${card.imageBase64}`;
+                        }
+
+                        div.innerHTML = `
+                            <img src="${imgSrc}" alt="Card ${i + 1}" class="w-full h-full object-cover" loading="lazy" />
+                            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <a href="${imgSrc}" download="card_${i + 1}.png" class="bg-white text-black px-4 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform">Baixar</a>
+                            </div>
+                        `;
+                        container.appendChild(div);
+                    });
+                    currentFlashcards = post.cards;
+                }
+
+            } catch (error) {
+                hideLoading();
+                alert('Erro ao abrir post: ' + error.message);
+            }
+        }
+
+        async function deletePost(id) {
+            if (!confirm('Tem certeza que deseja apagar este post permanentemente?')) return;
+
+            try {
+                const response = await fetch(`${API_URL}/api/posts/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) throw new Error('Erro ao deletar post');
+
+                // Refresh list
+                showSavedPosts();
+
+            } catch (error) {
+                alert('Erro ao deletar: ' + error.message);
+            }
+        }
+
+        document.getElementById('url-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') generateFromUrl();
+        });
+    </script>
+</body>
+
+</html>

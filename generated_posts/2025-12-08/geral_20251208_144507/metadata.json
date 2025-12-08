@@ -1,0 +1,50 @@
+{
+  "id": "geral_20251208_144507",
+  "timestamp": "2025-12-08T14:45:07.927706",
+  "category": "Geral",
+  "headline": "Produção de veículos cai 8,2% em novembro e derruba projeção para 2025",
+  "source": "Economia",
+  "url": "https://economia.uol.com.br/noticias/redacao/2025/12/08/anfavea---novembro-2025.htm",
+  "tiktokTitle": "Produção de veículos cai 8,2% em novembro - Anfavea",
+  "tiktokSummary": "A produção de veículos no Brasil recuou 8,2% em novembro, com a projeção para o ano inteiro sendo derrubada. A Anfavea destaca que a produção não atingirá o estimado de 7,8%, e será necessário um crescimento de 38% em dezembro para atingir a meta de emplacamentos estabelecida. #veiculos #producao #Anfavea #Brasil #economia #transporte",
+  "cards": [
+    {
+      "text": "Produção de veículos cai 8,2% em novembro. A queda contabilizada pela Anfavea é referente à fabricação de 219 mil automóveis, comerciais leves e caminhões.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Novembro foi o mês com a maior queda percentual de produtividade dos últimos 12 meses.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Para a meta de emplacamentos estabelecida ao final do ano passado, é necessário um crescimento de 38% em dezembro.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "A produção de veículos no acumulado deste ano soma 2,46 milhões de unidades, alta de 4,1% em relação ao mesmo período do ano passado.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Igor Calvet, presidente-executivo da Anfavea, diz que a projeção para o ano inteiro será derrubada.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    },
+    {
+      "text": "Na minha visão, não faz menor sentido revisar nenhuma projeção. Já estamos em dezembro",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_6.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

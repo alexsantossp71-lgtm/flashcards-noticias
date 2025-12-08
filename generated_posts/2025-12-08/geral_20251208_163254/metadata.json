@@ -1,0 +1,56 @@
+{
+  "id": "geral_20251208_163254",
+  "timestamp": "2025-12-08T16:32:54.849547",
+  "category": "Geral",
+  "headline": "Emendas PIX: Dino diz que irregularidades permanecem e encaminha relatório da CGU à PF",
+  "source": "Política",
+  "url": "https://g1.globo.com/politica/noticia/2025/12/08/emendas-pix-dino-diz-que-irregularidades-permanecem-e-encaminha-relatorio-da-cgu-para-pf.ghtml",
+  "tiktokTitle": "Emendas PIX sob Investigação!",
+  "tiktokSummary": "O ministro Flávio Dino, do STF, enviou à Polícia Federal um relatório da CGU sobre as \"emendas PIX\", que aponta irregularidades persistentes. Criadas em 2019, essas emendas permitem transferências diretas de parlamentares sem exigência de projeto ou justificativa, dificultando a fiscalização.\n\nA CGU auditou 20 municípios que receberam os maiores valores em 2024, identificando falhas generalizadas na transparência e rastreabilidade dos recursos. Dino vê uma grave afronta às decisões do STF e ao uso de bilhões do Orçamento. A PF investigará indícios de crimes. #EmendasPIX #FlavioDino #CGU #PoliciaFederal #Corrupcao",
+  "cards": [
+    {
+      "text": "Emendas PIX: Dino diz que irregularidades permanecem e encaminha relatório da CGU à PF\nPolítica",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Emendas PIX, criadas em 2019, são transferências diretas de parlamentares a estados/municípios sem projeto ou justificativa.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Dificuldade na fiscalização dos recursos e falta de rastreabilidade e transparência são problemas centrais apontados.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "CGU analisou 20 municípios que receberam mais verbas em 2024, 25,8% dos R$ 72 milhões de 481 planos de trabalho.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Nenhum dos 20 entes auditados atendeu plenamente aos requisitos, com falhas generalizadas na transparência ativa.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    },
+    {
+      "text": "Ministro Flávio Dino (STF) encaminhou o relatório da CGU à Polícia Federal para análise de indícios de crimes.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_6.png"
+    },
+    {
+      "text": "Dino vê falhas generalizadas e grave afronta às decisões do STF sobre uso de bilhões de reais do Orçamento da União.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_7.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

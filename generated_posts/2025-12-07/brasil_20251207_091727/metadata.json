@@ -1,0 +1,53 @@
+{
+  "id": "brasil_20251207_091727",
+  "timestamp": "2025-12-07T09:17:27.504643",
+  "category": "Brasil",
+  "headline": "Crianças autistas participam de sessão de terapia com cães do Bope em Macapá",
+  "source": "Brasil",
+  "url": "https://g1.globo.com/ap/amapa/noticia/2023/04/28/criancas-autistas-participam-de-sessao-de-cinoterapia-com-caes-do-bope-em-macapa.ghtml",
+  "tiktokTitle": "Crianças Autistas Encontrem Amigos Fidéis",
+  "tiktokSummary": "Uma sessão de terapia com cães do Bope ajuda crianças autistas a se desenvolverem. O projeto Melhor Amigo, que iniciou em 2019, agora está back online. Crianças com autismo e Síndrome de Down participaram da atividade. O objetivo é promover saúde física e mental. #Cinoterapia #Bope #Amapá #Autismo #SindromeDeDown\n\nFonte: https://g1.globo.com/ap/amapa/noticia/2023/04/28/criancas-autistas-participam-de-sessao-de-cinoterapia-com-caes-do-bope-em-macapa.ghtml",
+  "cards": [
+    {
+      "text": "Crianças Autistas Recevem Terapia com Cães do Bope em Macapá - g1 Amapá",
+      "imagePrompt": "Photo of a boy with autism playing with a dog, set in the Canil do Bope",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "A cinoterapia promove benefícios como saúde física e mental, de acordo com o coordenador do Creap.",
+      "imagePrompt": "Infographic illustration of a brain with positive emotions and physical health",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Valquíria Câmara acompanhou sua filha durante as atividades e destacou a importância do projeto.",
+      "imagePrompt": "Photo of Valquíria Câmara holding her daughter, both smiling with the dog in the background",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "A cinoterapia é uma atividade terapêutica que ajuda as crianças a se desenvolverem.",
+      "imagePrompt": "Illustration of a child playing with a dog, surrounded by colorful blocks and toys",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "O projeto Melhor Amigo foi interrompido em 2020 devido à pandemia de Covid-19, mas voltou em 2023.",
+      "imagePrompt": "Photo of a calendar with a red X marked for the pandemic and a green checkmark for the return",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    },
+    {
+      "text": "O objetivo é manter essa atividade regularmente para promover saúde física e mental.",
+      "imagePrompt": "Illustration of a child running with a dog, surrounded by healthy food and exercise icons",
+      "imageSource": "local",
+      "imagePath": "card_6.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {
+    "text": "ollama",
+    "image": "local"
+  }
+}
