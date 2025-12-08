@@ -1,42 +1,44 @@
-[
-  {
-    "id": "brasil_20251207_091727",
-    "timestamp": "2025-12-07T09:17:27.504643",
-    "category": "Brasil",
-    "headline": "Crianças autistas participam de sessão de terapia com cães do Bope em Macapá",
-    "tiktokTitle": "Crianças Autistas Encontrem Amigos Fidéis",
-    "path": "2025-12-07\\brasil_20251207_091727"
-  },
-  {
-    "id": "geral_20251208_133658",
-    "timestamp": "2025-12-08T13:36:58.630719",
-    "category": "Geral",
-    "headline": "Grupo empresarial deve pagar quase R$ 21 milhões por desvio de recursos da Cidade das Águas em Frutal",
-    "tiktokTitle": "Grupo Empresarial Paga R$ 21 Milhões pela Corrupção em Frutal",
-    "path": "2025-12-08\\geral_20251208_133658"
-  },
-  {
-    "id": "geral_20251208_144500",
-    "timestamp": "2025-12-08T14:45:00.870236",
-    "category": "Geral",
-    "headline": "Países da UE aprovam endurecimento da política migratória, apesar de queda nas chegadas",
-    "tiktokTitle": "Restrições à Imigração na UE: O que você precisa saber",
-    "path": "2025-12-08\\geral_20251208_144500"
-  },
-  {
-    "id": "geral_20251208_144507",
-    "timestamp": "2025-12-08T14:45:07.927706",
-    "category": "Geral",
-    "headline": "Produção de veículos cai 8,2% em novembro e derruba projeção para 2025",
-    "tiktokTitle": "Produção de veículos cai 8,2% em novembro - Anfavea",
-    "path": "2025-12-08\\geral_20251208_144507"
-  },
-  {
-    "id": "geral_20251208_163254",
-    "timestamp": "2025-12-08T16:32:54.849547",
-    "category": "Geral",
-    "headline": "Emendas PIX: Dino diz que irregularidades permanecem e encaminha relatório da CGU à PF",
-    "tiktokTitle": "Emendas PIX sob Investigação!",
-    "path": "2025-12-08\\geral_20251208_163254"
-  }
-]
+{
+  "posts": [
+    {
+      "id": "brasil_20251207_091727",
+      "timestamp": 1733567847,
+      "category": "Brasil",
+      "headline": "Crianças autistas participam de sessão de terapia com cães do Bope em Macapá",
+      "source": "Brasil",
+      "card_count": 6
+    },
+    {
+      "id": "geral_20251208_133658",
+      "timestamp": 1733669818,
+      "category": "Geral",
+      "headline": "Grupo empresarial deve pagar quase R$ 21 milhões por desvio de recursos da Cidade das Águas em Frutal",
+      "source": "Geral",
+      "card_count": 7
+    },
+    {
+      "id": "geral_20251208_144500",
+      "timestamp": 1733673900,
+      "category": "Geral",
+      "headline": "Países da UE aprovam endurecimento da política migratória, apesar de queda nas chegadas",
+      "source": "Geral",
+      "card_count": 7
+    },
+    {
+      "id": "geral_20251208_144507",
+      "timestamp": 1733673907,
+      "category": "Geral",
+      "headline": "Produção de veículos cai 8,2% em novembro e derruba projeção para 2025",
+      "source": "Geral",
+      "card_count": 6
+    },
+    {
+      "id": "geral_20251208_163254",
+      "timestamp": 1733680374,
+      "category": "Geral",
+      "headline": "Emendas PIX: Dino diz que irregularidades permanecem e encaminha relatório da CGU à PF",
+      "source": "Geral",
+      "card_count": 7
+    }
+  ]
+}
