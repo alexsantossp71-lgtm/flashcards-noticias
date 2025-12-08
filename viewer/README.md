@@ -6,15 +6,28 @@ Visualizador estático de cards de notícias gerados por IA.
 
 Acesse: **[FlashNews Viewer](https://alexsantossp71-lgtm.github.io/flashcards-noticias/viewer/)**
 
+> [!IMPORTANT]
+> **GitHub Pages precisa estar ativado!** Veja instruções abaixo.
+
 ## 💻 Ver Localmente
 
-```bash
-# Opção 1: Abrir direto no navegador
-cd viewer
-start index.html  # Windows
+> [!WARNING]
+> **NÃO abra o HTML diretamente** (`file:///`) - isso causa erro de CORS!
+> Use um servidor HTTP local:
 
-# Opção 2: Servidor local
-python -m http.server 8000  # Depois acesse http://localhost:8000/viewer/
+```bash
+# Opção 1: Python (a partir da raiz do projeto)
+cd f:\copy-of-gerador-de-flashcards-de-notícias
+python -m http.server 8000
+# Acesse: http://localhost:8000/viewer/
+
+# Opção 2: Node.js (a partir da raiz do projeto)
+npx http-server -p 8000
+# Acesse: http://localhost:8000/viewer/
+
+# Opção 3: PHP (a partir da raiz do projeto)
+php -S localhost:8000
+# Acesse: http://localhost:8000/viewer/
 ```
 
 ## 📁 Estrutura
