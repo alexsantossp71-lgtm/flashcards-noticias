@@ -1,0 +1,50 @@
+{
+  "id": "geral_20251208_221241",
+  "timestamp": "2025-12-08T22:12:41.173467",
+  "category": "Geral",
+  "headline": "Musk, dono do X, diz que UE ‘deveria ser abolida’ após multar a rede social em mais de R$ 700 milhões",
+  "source": "Tecnologia",
+  "url": "https://g1.globo.com/tecnologia/noticia/2025/12/06/musk-dono-do-x-diz-que-ue-deveria-ser-abolida-apos-multar-a-rede-social-em-mais-de-r-700.ghtml",
+  "tiktokTitle": "Musk Multou X em R$ 700 Milhões e Agora Amei Abolir UE",
+  "tiktokSummary": "O dono da rede social X, Elon Musk, diz que a União Europeia deveria ser abolida após receber uma multa de R$ 747 milhões por violar as normas digitais. A sanção foi criticada pela administração de Donald Trump e Musk afirmou que adora a Europa mas não o monstro burocrático que é a UE. Veja mais sobre o caso.",
+  "cards": [
+    {
+      "text": "Musk, dono do X, diz que UE ‘deveria ser abolida’ após multar a rede social em mais de R$ 700 milhões Tecnologia",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "A União Europeia aplicou uma multa de 120 milhões de euros (R$ 747 milhões) ao X por violar as normas digitais do bloco",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "A sanção foi criticada pela administração de Donald Trump, que se alinhou com Musk no início do mandato para reduzir a força de trabalho federal e cortar gastos nos Estados Unidos",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Musk afirmou que adora a Europa mas não o monstro burocrático que é a UE",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A Comissão Europeia afirmou que o X violou a obrigação de transparência prevista no Regulamento de Serviços Digitais (DSA)",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    },
+    {
+      "text": "As violações incluem o design enganoso do selo de verificação azul da plataforma e a falta de acesso a dados públicos para pesquisadores",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_6.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
