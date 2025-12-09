@@ -1,0 +1,56 @@
+{
+  "id": "geral_20251208_212947",
+  "timestamp": "2025-12-08T21:29:47.762053",
+  "category": "Geral",
+  "headline": "Trump diz que não é amigo da Netflix nem da Paramount em meio a disputa pela Warner",
+  "source": "Mundo",
+  "url": "https://g1.globo.com/economia/noticia/2025/12/08/trump-netflix-paramount-warner.ghtml",
+  "tiktokTitle": "Guerra bilionária em Hollywood!",
+  "tiktokSummary": "A Paramount lançou uma oferta hostil de US$ 108,4 bilhões pela Warner, intensificando a disputa com a Netflix, que já havia anunciado um acordo de US$ 70 bilhões. Trump declarou não ser “grande amigo” de nenhuma das empresas, enquanto a concorrência acirrada movimenta Hollywood e atrai a atenção de reguladores e do governo dos EUA.\n\nA oferta da Paramount, de US$ 30 por ação, supera a da Netflix, mas enfrenta escrutínio antitruste. A possível aquisição da Warner pela Netflix já havia gerado preocupação com a concentração de mercado. A batalha pelo controle da Warner Bros. Discovery promete agitar ainda mais o setor de entretenimento. #WarnerBros #Netflix #Paramount #Trump #Hollywood",
+  "cards": [
+    {
+      "text": "Trump diz que não é amigo da Netflix nem da Paramount em meio a disputa pela Warner\nMundo",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Paramount fez oferta hostil de US$ 108,4 bilhões pela Warner.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Trump: Netflix e Paramount não são minhas “grandes amigas”.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Netflix anunciou acordo de mais de US$ 70 bilhões para comprar a Warner.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Oferta hostil é tentativa de aquisição sem apoio da diretoria.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    },
+    {
+      "text": "Paramount já tentou assumir o controle da Warner nos últimos meses.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_6.png"
+    },
+    {
+      "text": "Órgãos antitruste devem analisar se fusões comprometem a concorrência.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_7.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
