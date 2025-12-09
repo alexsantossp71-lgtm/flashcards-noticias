@@ -1,0 +1,5 @@
+{
+  "name": "Copy of Gerador de Flashcards de Notícias",
+  "description": "Uma aplicação que encontra as principais notícias do dia e gera 7 flashcards com resumos e imagens gerados por I.A.",
+  "requestFramePermissions": []
+}
