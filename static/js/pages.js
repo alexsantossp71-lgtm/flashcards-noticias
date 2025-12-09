@@ -391,6 +391,10 @@ async function startGeneration() {
         }));
 
         state.set('flashcards', initialCards);
+        state.set('tiktokTitle', content.tiktokTitle);
+        state.set('tiktokSummary', content.tiktokSummary);
+        state.set('generationTime', content.generationTime || 0);
+        state.set('modelUsed', content.modelUsed || 'unknown');
         state.hideLoading();
         renderFlashcards();
 
@@ -406,23 +410,85 @@ async function startGeneration() {
                 );
                 const flashcards = state.get('flashcards');
                 flashcards[i].imageBase64 = imageData.imageBase64;
+                flashcards[i].imageSource = imageData.imageSource;  // Store source
                 state.set('flashcards', [...flashcards]);
                 renderFlashcards();
-            } catch (err) {
-                console.error(`Error generating image ${i}:`, err);
             }
         }
         state.hideLoading();
+
+        // AUTO-SAVE + AUTO-PUSH: Save and push to GitHub automatically
+        try {
+            state.showLoading('Salvando cards automaticamente...');
+            const flashcards = state.get('flashcards');
+
+            // Prepare data for save
+            const saveData = {
+                category: headline.source || 'Geral',
+                headline: headline.headline,
+                source: headline.source || 'Web',
+                url: headline.url || '',
+                tiktokTitle: state.get('tiktokTitle') || headline.headline,
+                tiktokSummary: state.get('tiktokSummary') || '',
+                cards: flashcards.map(card => ({
+                    text: card.text,
+                    imagePrompt: card.imagePrompt,
+                    imageBase64: card.imageBase64,
+                    imageSource: card.imageSource || 'local'
+                })),
+                generationTime: state.get('generationTime') || 0,
+                modelUsed: {
+                    text: state.get('modelUsed') || 'unknown',
+                    image: flashcards[0]?.imageSource || 'local'
+                }
+            };
+
+            const result = await api.savePost(saveData);
+            console.log('Auto-save successful:', result);
+
+            // AUTO-PUSH to GitHub
+            try {
+                state.showLoading('Enviando para GitHub...');
+                const pushResult = await api.pushToGitHub();
+                state.hideLoading();
+
+                // Show success message with GitHub info
+                alert(`✅ Post salvo e enviado ao GitHub!
+
+📦 Post ID: ${result.postId}
+📊 Total de cards: ${flashcards.length}
+🚀 Commit: ${pushResult.commit || 'Auto-save'}
+
+Aguarde 1-2 minutos para visualizar no GitHub Pages:
+https://alexsantossp71-lgtm.github.io/flashcards-noticias/viewer/`);
+
+            } catch (pushError) {
+                state.hideLoading();
+                console.error('Auto-push failed:', pushError);
+                alert(`✅ Post salvo localmente!
+
+⚠️ Erro ao enviar para GitHub: ${pushError.message}
+
+Você pode enviar manualmente depois usando:
+enviar_cards_github.bat`);
+            }
+
+        } catch (saveError) {
+            state.hideLoading();
+            console.error('Auto-save failed:', saveError);
+            alert(`⚠️ Erro ao salvar automaticamente: ${saveError.message}
+
+Você pode tentar salvar manualmente depois.`);
+        }
 
     } catch (error) {
         state.hideLoading();
         state.showError('Erro na geração: ' + error.message);
     }
-}
 
-// ========== SAVED POSTS PAGE ==========
-export function renderSavedPostsPage() {
-    render(`
+    // ========== SAVED POSTS PAGE ==========
+    export function renderSavedPostsPage() {
+        render(`
         <div class="min-h-screen bg-gray-900 flex flex-col p-4 pb-24">
             <div class="flex items-center mb-6">
                 <button id="btn-back" class="p-2 -ml-2 text-gray-400">${icons.chevronLeft}</button>
@@ -432,21 +498,21 @@ export function renderSavedPostsPage() {
         </div>
     `);
 
-    document.getElementById('btn-back').addEventListener('click', () => navigateTo('/'));
-    loadSavedPosts();
-}
+        document.getElementById('btn-back').addEventListener('click', () => navigateTo('/'));
+        loadSavedPosts();
+    }
 
-async function loadSavedPosts() {
-    try {
-        const data = await api.getSavedPosts();
-        const container = document.getElementById('posts-container');
+    async function loadSavedPosts() {
+        try {
+            const data = await api.getSavedPosts();
+            const container = document.getElementById('posts-container');
 
-        if (!data.posts || data.posts.length === 0) {
-            container.innerHTML = '<p class="text-gray-500 text-center col-span-full">Nenhum post salvo encontrado.</p>';
-            return;
-        }
+            if (!data.posts || data.posts.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center col-span-full">Nenhum post salvo encontrado.</p>';
+                return;
+            }
 
-        container.innerHTML = data.posts.map(post => `
+            container.innerHTML = data.posts.map(post => `
             <div data-post-id="${post.id}" class="bg-gray-800 rounded-xl overflow-hidden border border-gray-700 shadow-sm hover:border-primary-500 transition-all cursor-pointer">
                 <div class="h-32 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center relative">
                     <span class="text-3xl opacity-20">🖼️</span>
@@ -466,37 +532,37 @@ async function loadSavedPosts() {
             </div>
         `).join('');
 
-        // Add click handlers
-        container.querySelectorAll('[data-post-id]').forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (!e.target.closest('[data-delete]')) {
-                    navigateTo(`/saved/${card.dataset.postId}`);
-                }
-            });
-        });
-
-        container.querySelectorAll('[data-delete]').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                e.stopPropagation();
-                if (confirm('Tem certeza que deseja apagar este post?')) {
-                    try {
-                        await api.deletePost(btn.dataset.delete);
-                        loadSavedPosts();
-                    } catch (err) {
-                        state.showError('Erro ao deletar: ' + err.message);
+            // Add click handlers
+            container.querySelectorAll('[data-post-id]').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (!e.target.closest('[data-delete]')) {
+                        navigateTo(`/saved/${card.dataset.postId}`);
                     }
-                }
+                });
             });
-        });
 
-    } catch (error) {
-        state.showError('Erro ao carregar posts: ' + error.message);
+            container.querySelectorAll('[data-delete]').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    if (confirm('Tem certeza que deseja apagar este post?')) {
+                        try {
+                            await api.deletePost(btn.dataset.delete);
+                            loadSavedPosts();
+                        } catch (err) {
+                            state.showError('Erro ao deletar: ' + err.message);
+                        }
+                    }
+                });
+            });
+
+        } catch (error) {
+            state.showError('Erro ao carregar posts: ' + error.message);
+        }
     }
-}
 
-// ========== POST DETAIL PAGE ==========
-export function renderPostDetailPage(params) {
-    render(`
+    // ========== POST DETAIL PAGE ==========
+    export function renderPostDetailPage(params) {
+        render(`
         <div class="min-h-screen bg-gray-900 flex flex-col p-4">
             <div class="flex items-center mb-6">
                 <button id="btn-back" class="p-2 -ml-2 text-gray-400">${icons.chevronLeft}</button>
@@ -506,16 +572,16 @@ export function renderPostDetailPage(params) {
         </div>
     `);
 
-    document.getElementById('btn-back').addEventListener('click', () => navigateTo('/saved'));
-    loadPostDetails(params.id);
-}
+        document.getElementById('btn-back').addEventListener('click', () => navigateTo('/saved'));
+        loadPostDetails(params.id);
+    }
 
-async function loadPostDetails(postId) {
-    try {
-        const post = await api.getSavedPostDetails(postId);
-        const container = document.getElementById('post-content');
+    async function loadPostDetails(postId) {
+        try {
+            const post = await api.getSavedPostDetails(postId);
+            const container = document.getElementById('post-content');
 
-        container.innerHTML = `
+            container.innerHTML = `
             <div class="mb-6">
                 <h1 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400">
                     ${post.tiktokTitle || post.headline}
@@ -543,14 +609,14 @@ async function loadPostDetails(postId) {
                 `).join('')}
             </div>
         `;
-    } catch (error) {
-        state.showError('Erro ao carregar post: ' + error.message);
+        } catch (error) {
+            state.showError('Erro ao carregar post: ' + error.message);
+        }
     }
-}
 
-// ========== ABOUT PAGE ==========
-export function renderAboutPage() {
-    render(`
+    // ========== ABOUT PAGE ==========
+    export function renderAboutPage() {
+        render(`
         <div class="min-h-screen bg-gray-900 flex flex-col p-4">
             <div class="flex items-center mb-6">
                 <button id="btn-back" class="p-2 -ml-2 text-gray-400">${icons.chevronLeft}</button>
@@ -569,5 +635,5 @@ export function renderAboutPage() {
         </div>
     `);
 
-    document.getElementById('btn-back').addEventListener('click', () => navigateTo('/'));
-}
+        document.getElementById('btn-back').addEventListener('click', () => navigateTo('/'));
+    }
