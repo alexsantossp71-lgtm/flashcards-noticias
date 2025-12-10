@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_111526",
+  "timestamp": "2025-12-10T11:15:26.492174",
+  "category": "Geral",
+  "headline": "Mudanças climáticas afetam agricultura no Brasil",
+  "source": "BBC Brasil",
+  "url": "https://www.bbc.com/portuguese/articles/mudancas-climaticas-afetam-agricultura-brasil",
+  "tiktokTitle": "Mudanças Climáticas Afetam Agricultura no Brasil",
+  "tiktokSummary": "A mudança climática está afetando a agricultura no Brasil. Segundo um relato da BBC Brasil, as alteraçôes climaticas est«am impactando o sistema de irrigação dos cultivos no estado do Mato Grosso. Além, a seca e a elevada temperatura está afetando a produçó de milho e soja. A mudança climática tambîm está sendo sentida na produçó de frutas, como o abacate. Estas alteraçôes est«am afetando a economia rural do Brasil e a segurança alimentar do paíss. A mudança climática tambîm está sendo sentida na produçó de frutas, como o abacate.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://www.bbc.com/portuguese/articles/mudancas-climaticas-afetam-agricultura-brasil",
+  "cards": [
+    {
+      "text": "Mudanças Climáticas Afetam Agricultura no Brasil\nBBC Brasil",
+      "imagePrompt": " Uma imagem com a manchete da BBC Brasil em fundo, com um campo de milho ou soja ao fundo e uma pessoa segurando uma muda de abacate na mêndobira, com uma atmosfera neutra.",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "A seca e a elevada temperatura está afetando a produçó de milho e soja",
+      "imagePrompt": " Uma imagem de um campo de milho ou soja secos, com uma linha reta ao fundo representando a falta de chuva, e uma pessoa segurando uma muda de milho ou soja na mêndobira.",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "A mudança climática tambîm está sendo sentida na produçó de frutas, como o abacate",
+      "imagePrompt": " Uma imagem com uma árvore de abacate verde e maduros em fundo, com uma pessoa segurando um abacate fresco na mêndobira.",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Estas alteraçôes est«am afetando a economia rural do Brasil e a segurança alimentar do paíss",
+      "imagePrompt": " Uma imagem com uma pessoa segurando um saco de frutas frescas, e um campo de milho ou soja ao fundo, com uma atmosfera neutra.",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A mudança climática tambîm está sendo sentida na produçó de frutas, como o abacate",
+      "imagePrompt": " Uma imagem com uma pessoa segurando um saco de frutas frescas, e um campo de milho ou soja ao fundo, com uma atmosfera neutra.",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
