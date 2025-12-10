@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_112958",
+  "timestamp": "2025-12-10T11:29:58.622878",
+  "category": "Geral",
+  "headline": "Brasil anuncia novo programa social",
+  "source": "G1",
+  "url": "https://g1.globo.com",
+  "tiktokTitle": "Senado pode votar na próxima quarta sobre projeto que reduz pena de Bolsonaro",
+  "tiktokSummary": "O Senado aprovou uma proposta que reduz a pena de prisão de Jair Bolsonaro, passando de 7 anos para 2 anos e 4 meses. O projeto também foi entrevistado hoje, ao vivo, a partir das 13h.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://g1.globo.com",
+  "cards": [
+    {
+      "text": "Senado aprova proposta que reduz pena de Bolsonaro",
+      "imagePrompt": "(MAPA:1.5), (gilmar:1.3), (bolsonaro:1.3), serious political atmosphere, formal setting, dramatic spotlighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Tempo de prisão pode cair de 7 anos para 2 anos e 4 meses",
+      "imagePrompt": "(MAPA:1.5), (gilmar:1.3), (bolsonaro:1.3), tense dramatic atmosphere, urgent situation, dramatic shadowy lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Projota é entrevistado hoje, ao vivo, a partir das 13h",
+      "imagePrompt": "(MAPA:1.5), (gilmar:1.3), (bolsonaro:1.3), professional news atmosphere, clean setting, natural professional lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "STF pede que Senate derrube decisão sobre impeachment",
+      "imagePrompt": "(MAPA:1.5), (gilmar:1.3), (bolsonaro:1.3), professional news atmosphere, clean setting, natural professional lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Caixa permite mais de um financiamento imobiliário",
+      "imagePrompt": "(MAPA:1.5), (gilmar:1.3), (bolsonaro:1.3), professional news atmosphere, clean setting, natural professional lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
