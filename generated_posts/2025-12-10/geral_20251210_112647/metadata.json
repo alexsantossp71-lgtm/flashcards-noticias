@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_112647",
+  "timestamp": "2025-12-10T11:26:47.065434",
+  "category": "Geral",
+  "headline": "Extrema lança o maior programa habitacional de Minas Gerais",
+  "source": "G1",
+  "url": "https://g1.globo.com/mg/sul-de-minas/especial-publicitario/prefeitura-de-extrema-transparencia-extrema/noticia/2025/12/10/extrema-lanca-o-maior-programa-habitacional-de-minas-gerais.ghtml",
+  "tiktokTitle": "Extrema lança o maior programa habitacional de Minas Gerais",
+  "tiktokSummary": "A Prefeitura de Extrema está dando um passo histórico rumo ao futuro com o lançamento do Extrema Meu Lar, o maior Programa Habitacional do Estado de Minas Gerais. Com mais de 1.300 famílias beneficiadas, o programa traz moradias populares em estilo vertical, sustentáveis e pensadas para o bem-estar das famílias. Leia mais: https://g1.globo.com/mg/sul-de-minas/especial-publicitario/prefeitura-de-extrema-transparencia-extrema/noticia/2025/12/10/extrema-lanca-o-maior-programa-habitacional-de-minas-gerais.ghtml\n\n#Notícias #Brasil #Urgente #Hoje #News",
+  "cards": [
+    {
+      "text": "Extrema lança o maior programa habitacional de Minas Gerais\nG1",
+      "imagePrompt": "(Meu Lar:1.5), (minas:1.3), professional news atmosphere, clean setting, natural professional lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "O programa traz 1300 moradias para famílias extremenses",
+      "imagePrompt": "(Meu Lar:1.5), (minas:1.3), professional news atmosphere, clean setting, natural professional lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "As moradias são construídas em estilo vertical e sustentáveis",
+      "imagePrompt": "(Meu Lar:1.5), (minas:1.3), medical professional atmosphere, clinical setting, bright clinical lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "O programa também traz infraestrutura completa e serviços para as famílias",
+      "imagePrompt": "(Meu Lar:1.5), (minas:1.3), professional news atmosphere, clean setting, natural professional lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A Prefeitura doou o terreno onde o programa será construído",
+      "imagePrompt": "(Meu Lar:1.5), (minas:1.3), professional news atmosphere, clean setting, natural professional lighting, photorealistic, high quality, detailed, professional photography",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
