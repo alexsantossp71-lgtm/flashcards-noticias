@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_111008",
+  "timestamp": "2025-12-10T11:10:08.708975",
+  "category": "Geral",
+  "headline": "OMS alerta para nova variante",
+  "source": "Veja",
+  "url": "https://veja.abril.com.br/saude/oms-alerta-para-nova-variante.html",
+  "tiktokTitle": "OMS Alerta Nova Variante",
+  "tiktokSummary": "A Organização Mundial da Saúde (OMS) alertou para a existência de uma nova variante do coronavírus. A notícia foi divulgada em um artigo na revista Veja, que destacou os riscos associados a essa nova variante.\n\nA OMS expressou preocupação com o potencial da nova variante de se espalhar rapidamente em todo o mundo, especialmente em áreas com baixa vacinação. A agência também destacou a importância de implementar medidas de controle de saúde para evitar a propagação dessa doença.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\nLeia mais: https://veja.abril.com.br/saude/oms-alerta-para-nova-variante.html",
+  "cards": [
+    {
+      "text": "OMS alerta para nova variante\nVeja",
+      "imagePrompt": "Um rosto de um funcionário da OMS com uma máscara, com um fundo de cartaz com a bandeira da OMS e uma imagem de corona-vírus em segundo plano.",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "A nova variante do coronavírus pode ser mais contagiosa",
+      "imagePrompt": "Um gráfico mostrando a curva de transmissão da doença, com um ícone de corona-vírus crescendo rapidamente.",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Risco para pessoas com baixa vacinação",
+      "imagePrompt": "Uma imagem de uma pessoa segurando uma gota de vacina, com uma faixa de alerta sobre a importância da vacinação em segundo plano.",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Medidas de controle de saúde recomendadas",
+      "imagePrompt": "Um profissional de saúde usando equipamento de proteção individual (EPI), com um cartaz no fundo com instruções sobre medidas de controle.",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Importância da cooperação internacional",
+      "imagePrompt": "Uma imagem de uma reunião entre funcionários da OMS e governantes de diferentes países, com uma faixa de alerta sobre a necessidade de cooperação.",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
