@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_111244",
+  "timestamp": "2025-12-10T11:12:44.060402",
+  "category": "Geral",
+  "headline": "Tensão aumenta no Oriente Médio",
+  "source": "Estadão",
+  "url": "https://www.estadao.com.br/internacional/tensao-aumenta-no-oriente-medio.htm",
+  "tiktokTitle": "Tensão Aumenta no Oriente Médio",
+  "tiktokSummary": "A tensão no Oriente Médio aumentou nos últimos dias devido a uma série de eventos políticos e militares. A situação é crítica, com vários países do regionais envolvidos em conflitos armados. 🌎💥 #OrienteMédio #Tensão #Conflito #Política #Segurança\n\n🔗 Leia mais: https://www.estadao.com.br/internacional/tensao-aumenta-no-oriente-medio.htm",
+  "cards": [
+    {
+      "text": "MANCHETE ESTADÃO\nEstadão",
+      "imagePrompt": "describe MANCHETE ESTADÃO em inglês (palavras, caracteres), estilo cyberpunk, neon, futuroista, escuro",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "O Oriente Médio está sendo afetado por conflitos armados e tensões políticas",
+      "imagePrompt": "descreva uma cena de um campo de batalha no Oriente Médio, com soldados armados, tanques em primeiro plano, fundo escuro e nuvens cinzentas",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "A situação é crítica e requer intervenção internacional",
+      "imagePrompt": "descreva uma cena de um líder político (pode ser Maria Corina Machado) falando em público, com uma plateia cheia de pessoas preocupadas, fundo sombrio e luzes piscantes",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "A tensão é causada por uma série de eventos políticos e militares",
+      "imagePrompt": "descreva uma cena de um mapa geopolítico do Oriente Médio, com países e cidades marcadas, fundo escuro e luzes piscantes",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A situação é complexa e requer uma solução rápida",
+      "imagePrompt": "descreva uma cena de um grupo de especialistas políticos e militares reunidos em torno de uma mesa, com mapas e documentos espalhados, fundo sombrio e luzes piscantes",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
