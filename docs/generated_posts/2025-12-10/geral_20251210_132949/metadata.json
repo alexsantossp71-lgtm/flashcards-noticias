@@ -1,0 +1,45 @@
+{
+  "id": "geral_20251210_132949",
+  "timestamp": "2025-12-10T13:29:49.881089",
+  "articleDate": "2025-12-10",
+  "category": "Geral",
+  "headline": "Bolsonaro pode sair da prisão em dois anos e quatro meses com PL da Dosimetria",
+  "source": "BBC Brasil",
+  "url": "https://www.bbc.com/portuguese/articles/cx23pmy4zdpo?at_medium=RSS&at_campaign=rss",
+  "tiktokTitle": "Bolsonaro pode sair da prisão em dois anos e quatro meses com PL da Dosimetria",
+  "tiktokSummary": "A Câmara aprovou projeto que altera dosimetria das penas aplicadas a pessoas condenadas por crimes como golpe de Estado e tentativa de abolição do Estado Democrático de direito. O ex-presidente Jair Bolsonaro pode ser libertado mais cedo.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://www.bbc.com/portuguese/articles/cx23pmy4zdpo?at_medium=RSS&at_campaign=rss",
+  "cards": [
+    {
+      "text": "Bolsonaro pode sair da prisão em dois anos e quatro meses com PL da Dosimetria\nBBC Brasil\nData: [10/12/2023]",
+      "imagePrompt": "(bolsonaro:1.5), (pode:1.3), tense dramatic atmosphere, urgent situation, dramatic shadowy lighting, editorial cartoon illustration, bold lines, satirical, political cartoon style",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Condenado a 27 anos e três meses de prisão em setembro, mas projeto reduziria esse período",
+      "imagePrompt": "(condenado:1.5), (anos:1.3), tense dramatic atmosphere, urgent situation, dramatic shadowy lighting, editorial cartoon illustration, bold lines, satirical, political cartoon style",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Projeto de lei pode reduzir o período de cumprimento da pena em regime fechado de Bolsonaro para até 2 anos e 4 meses",
+      "imagePrompt": "(projeto:1.5), (pode:1.3), serious political atmosphere, formal setting, dramatic spotlighting, editorial cartoon illustration, bold lines, satirical, political cartoon style",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Plenário aprovou projeto com 291 votos e 148 votaram contra",
+      "imagePrompt": "(plenário:1.5), (aprovou:1.3), tense dramatic atmosphere, urgent situation, dramatic shadowy lighting, editorial cartoon illustration, bold lines, satirical, political cartoon style",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Chamado PL da Dosimetria segue agora para o Senado e precisa passar pela sanção do presidente Lula",
+      "imagePrompt": "(chamado:1.5), (dosimetria:1.3), serious political atmosphere, formal setting, dramatic spotlighting, editorial cartoon illustration, bold lines, satirical, political cartoon style",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
