@@ -40,16 +40,16 @@ if exist "venv312\Scripts\python.exe" (
 )
 echo.
 
-:: 3. Aguardar inicialização
-echo [3/4] Aguardando inicializacao (30 segundos)...
+:: 3. Aguardar inicialização (15 segundos)
+echo [3/4] Aguardando inicializacao (15 segundos)...
 echo.
 echo    Backend rodando em: http://localhost:8000
 echo    Interface em: http://localhost:8000/static/
 echo.
 
-timeout /t 30 /nobreak
+timeout /t 15 /nobreak
 
-:: 4. Abrir Navegador
+:: 4. Abrir Navegador PRIMEIRO
 echo [4/4] Abrindo Interface no Navegador...
 start "" "http://localhost:8000/static/"
 echo    -> Interface aberta.
@@ -67,9 +67,9 @@ if %ERRORLEVEL% EQU 0 (
     echo ✓ Backend rodando (http://localhost:8000)
     echo ✓ Interface aberta no navegador
     echo.
-    echo Esta janela fechará em 5 segundos...
+    echo Esta janela fechara em 15 segundos...
     echo Mantenha a janela do servidor (minimizada) aberta.
-    timeout /t 5 /nobreak >nul
+    timeout /t 15 /nobreak >nul
     exit /b 0
 ) else (
     echo ==========================================

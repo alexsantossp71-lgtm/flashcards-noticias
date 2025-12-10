@@ -1,23 +1,26 @@
+# -*- coding: utf-8 -*-
 """
 Main FastAPI Server - Local AI Backend
-Now with Gemini API for 10-20x faster text generation!
+Using Ollama for text generation
+✅ UTF-8 encoding garantido para acentuação e caracteres especiais
 """
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Optional, Dict
 import logging
 import time
 from pathlib import Path
 
-from config import API_HOST, API_PORT, CORS_ORIGINS, TEXT_BACKEND, GEMINI_API_KEY
+from config import API_HOST, API_PORT, CORS_ORIGINS
 from services.ollama_service import OllamaService
-from services.gemini_service import GeminiService
 from services.rss_service import RSSService
 from services.image_service import ImageService
 from services.storage_service import StorageService
+from services.prompt_enhancer_service import PromptEnhancerService
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -35,22 +38,23 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize services
-# Text: Gemini (fast) or Ollama (fallback)
-if TEXT_BACKEND == "gemini" and GEMINI_API_KEY:
-    try:
-        text_service = GeminiService()
-        logger.info("✅ Using Gemini API for text generation (FAST MODE)")
-    except Exception as e:
-        logger.warning(f"Gemini failed, using Ollama: {e}")
-        text_service = OllamaService()
-else:
-    text_service = OllamaService()
-    logger.info("Using Ollama for text generation")
+# Initialize services - Ollama only
+text_service = OllamaService()
+logger.info("✅ Using Ollama for text generation")
 
 rss_service = RSSService()
 image_service = ImageService()  # Always local!
 storage_service = StorageService()
+prompt_enhancer = PromptEnhancerService()  # ✅ NEW: Auto-enhance prompts
+logger.info("✅ Prompt Enhancer Service initialized")
+
+# Mount static files
+static_dir = Path(__file__).parent.parent / "static"
+if static_dir.exists():
+    app.mount("/static", StaticFiles(directory=str(static_dir), html=True), name="static")
+    logger.info(f"✅ Static files mounted from {static_dir}")
+else:
+    logger.warning(f"⚠️ Static directory not found: {static_dir}")
 
 
 # --- REQUEST/RESPONSE MODELS ---
@@ -88,6 +92,7 @@ class SavePostRequest(BaseModel):
     cards: List[Dict]
     generationTime: float
     modelUsed: Dict
+    articleDate: Optional[str] = None  # ✅ NOVO: Data da notícia
 
 # --- API ENDPOINTS ---
 
@@ -96,16 +101,26 @@ async def root():
     return {
         "message": "FlashNews AI - Local Backend v2.0",
         "status": "running",
-        "textBackend": TEXT_BACKEND,
+        "textBackend": "ollama",
         "imageBackend": "local (diffusers)"
     }
+
+@app.get("/favicon.ico")
+async def favicon():
+    """Serve favicon to avoid 404 errors"""
+    favicon_path = Path(__file__).parent.parent / "static" / "assets" / "favicon.ico"
+    if favicon_path.exists():
+        return FileResponse(favicon_path)
+    # Return 404 if not found (BytesIO não funciona com FileResponse)
+    from fastapi import HTTPException
+    raise HTTPException(status_code=404, detail="Favicon not found")
 
 @app.get("/api/status")
 async def status():
     text_status = text_service.check_health()
     return {
         "status": "online",
-        "textService": TEXT_BACKEND,
+        "textService": "ollama",
         "textHealth": "connected" if text_status else "disconnected",
         "timestamp": time.time()
     }
@@ -114,16 +129,39 @@ async def status():
 async def push_to_github():
     """
     Automatically commit and push new cards to GitHub
+    + Sync to docs/ for GitHub Pages viewer
     """
     import subprocess
+    import shutil
+    import json
     from pathlib import Path
     
     try:
         repo_path = Path(__file__).parent.parent
         
+        # ✅ SYNC GITHUB PAGES: Copiar index.json para docs/posts/
+        logger.info("📋 Syncing GitHub Pages viewer...")
+        source_index = repo_path / "generated_posts" / "index.json"
+        dest_index = repo_path / "docs" / "posts" / "index.json"
+        
+        if source_index.exists():
+            # Criar diretório se não existir
+            dest_index.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Copiar com preservação de metadados
+            shutil.copy2(source_index, dest_index)
+            
+            # Contar posts para log
+            with open(source_index, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                posts_count = len(data.get('posts', []))
+                logger.info(f"✅ Synced {posts_count} posts to GitHub Pages viewer")
+        else:
+            logger.warning("⚠️ source index.json not found, skipping sync")
+        
         # Check git status
         result = subprocess.run(
-            ["git", "status", "--porcelain", "generated_posts/"],
+            ["git", "status", "--porcelain", "generated_posts/", "docs/"],
             cwd=repo_path,
             capture_output=True,
             text=True,
@@ -133,9 +171,9 @@ async def push_to_github():
         if not result.stdout.strip():
             return {"success": True, "message": "No changes to commit"}
         
-        # Add generated_posts
+        # Add generated_posts AND docs
         subprocess.run(
-            ["git", "add", "generated_posts/"],
+            ["git", "add", "generated_posts/", "docs/"],
             cwd=repo_path,
             check=True,
             timeout=10
@@ -143,7 +181,7 @@ async def push_to_github():
         
         # Commit
         from datetime import datetime
-        commit_msg = f"Auto-save: New flashcards generated on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+        commit_msg = f"Auto-save: New flashcards + GitHub Pages sync on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
         subprocess.run(
             ["git", "commit", "-m", commit_msg],
             cwd=repo_path,
@@ -162,8 +200,9 @@ async def push_to_github():
         logger.info(f"✅ Auto-pushed to GitHub: {commit_msg}")
         return {
             "success": True,
-            "message": "Cards pushed to GitHub successfully",
-            "commit": commit_msg
+            "message": "Cards pushed to GitHub + Pages viewer updated",
+            "commit": commit_msg,
+            "viewerSynced": True
         }
         
     except subprocess.TimeoutExpired:
@@ -220,16 +259,29 @@ async def generate_content(request: GenerateContentRequest):
             article_text=article_text
         )
         
+        # ✅ AUTO-ENHANCE: Processar imagePrompts com PromptEnhancerService
+        if 'flashcards' in content and content['flashcards']:
+            logger.info("🎨 Enhancing image prompts automatically...")
+            enhanced_cards = prompt_enhancer.batch_enhance(
+                cards=content['flashcards'],
+                headline=request.headline,
+                article_text=article_text,
+                style_prompt=request.stylePrompt
+            )
+            content['flashcards'] = enhanced_cards
+            logger.info(f"✅ Enhanced {len(enhanced_cards)} prompts")
+        
         generation_time = time.time() - start_time
         
-        # Model name
-        model_name = "Gemini 1.5 Flash" if isinstance(text_service, GeminiService) else getattr(text_service, 'primary_model', 'Ollama')
+        # Model name - Ollama only
+        model_name = getattr(text_service, 'primary_model', 'Ollama')
         
         return {
             **content,
             "generationTime": generation_time,
             "modelUsed": model_name,
-            "scrapedContent": bool(article_text)
+            "scrapedContent": bool(article_text),
+            "promptsEnhanced": True  ##✅ Indicador de que prompts foram otimizados
         }
     except Exception as e:
         logger.error(f"Error generating content: {e}")
@@ -273,7 +325,8 @@ async def save_post(request: SavePostRequest):
             tiktok_summary=request.tiktokSummary,
             cards=request.cards,
             generation_time=request.generationTime,
-            models_used=request.modelUsed
+            models_used=request.modelUsed,
+            article_date=request.articleDate  # ✅ NOVO
         )
         
         return result

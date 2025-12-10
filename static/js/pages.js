@@ -13,7 +13,13 @@ const IMAGE_STYLES = [
     { id: '3d', label: '3D Pixar', emoji: '🧸', prompt: 'o estilo deve ser renderização 3D estilizada (tipo Pixar/Disney), com iluminação suave, texturas fofas (soft shading), formas arredondadas e cores agradáveis.' },
     { id: 'watercolor', label: 'Aquarela', emoji: '🖌️', prompt: 'o estilo deve ser aquarela artística, com pinceladas suaves, transições de cor fluidas, bordas levemente desfocadas e uma estética delicada e orgânica.' },
     { id: 'neon', label: 'Neon Cyberpunk', emoji: '🌃', prompt: 'o estilo deve ser cyberpunk neon, com cores vibrantes (rosa, ciano, roxo), iluminação neon intensa, alto contraste, atmosfera futurista e urbana noturna.' },
-    { id: 'minimalist', label: 'Minimalista', emoji: '⚪', prompt: 'o estilo deve ser minimalista e clean, com formas geométricas simples, paleta de cores limitada (2-3 cores), muito espaço negativo e design ultra-simplificado.' }
+    { id: 'minimalist', label: 'Minimalista', emoji: '⚪', prompt: 'o estilo deve ser minimalista e clean, com formas geométricas simples, paleta de cores limitada (2-3 cores), muito espaço negativo e design ultra-simplificado.' },
+    { id: 'photojournalism', label: 'Fotojornalismo', emoji: '📸', prompt: 'estilo fotojornalístico realista, fotografia documental de notícias, captura natural, iluminação ambiente, alta qualidade profissional.' },
+    { id: 'editorial', label: 'Desenho Editorial', emoji: '✏️', prompt: 'ilustração de cartoon editorial, linhas grossas e marcantes, estilo satírico, cartoon político, cores impactantes.' },
+    { id: 'impressionism', label: 'Impressionismo Digital', emoji: '🎨', prompt: 'impressionismo digital, pinceladas artísticas suaves, interpretação pictórica, cores misturadas, estética de pintura clássica.' },
+    { id: 'popart', label: 'Pop Art', emoji: '💥', prompt: 'estilo pop art, cores vibrantes e saturadas, estética de quadrinhos, pontos de retícula halftone, visual impactante tipo Andy Warhol.' },
+    { id: 'grunge', label: 'Grunge', emoji: '🎸', prompt: 'estética grunge urbana, texturizado e áspero, mood escuro e cru, visual underground, tons dessaturados com alto contraste.' },
+    { id: 'vintage', label: 'Pôster Vintage', emoji: '📜', prompt: 'design de pôster vintage retrô, estilo de propaganda clássica, cores desbotadas, textura de papel envelhecido, tipografia antiga.' }
 ];
 
 // ========== HOME PAGE ==========

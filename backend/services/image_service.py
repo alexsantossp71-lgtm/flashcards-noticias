@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 """
 Image Service - Generate images using local models or Pollinations fallback
 Supports: ComfyUI, Automatic1111, Fooocus, Pollinations
+✅ UTF-8 encoding garantido para acentuação em overlays de texto
 """
 
 import requests
@@ -36,9 +38,20 @@ class ImageService:
         Card 1: Title (white) + Source (orange)
         Cards 2-7: Content text (white)
         All: Black stroke, Montserrat Bold font, large size
+        
+        ✅ SUPORTE COMPLETO A UTF-8: Acentuação, til (~), cedilha (ç), etc.
         """
         from PIL import ImageDraw, ImageFont
         import os
+        
+        # ✅ GARANTIR ENCODING UTF-8: Normalizar texto para garantir caracteres corretos
+        # Isso resolve problemas com acentuação, til, cedilha, etc.
+        if isinstance(text, bytes):
+            text = text.decode('utf-8')
+        
+        # Normalizar para garantir que caracteres compostos sejam processados corretamente
+        import unicodedata
+        text = unicodedata.normalize('NFC', text)  # Canonical decomposition + composition
         
         width, height = image.size
         
@@ -51,9 +64,10 @@ class ImageService:
             current_dir = os.path.dirname(os.path.abspath(__file__))
             backend_dir = os.path.dirname(current_dir)
             
-            # Try different font paths in order of preference
+            # ✅ Fontes com SUPORTE COMPLETO a acentuação/UTF-8
+            # Ordem: Montserrat > Arial Bold > Arial (todas suportam caracteres latinos)
             font_paths = [
-                # Downloaded Montserrat
+                # Downloaded Montserrat (melhor opção - moderna e legível)
                 os.path.join(backend_dir, "fonts", "Montserrat-Bold.ttf"),
                 # Windows system Montserrat (if installed)
                 "C:\\Windows\\Fonts\\Montserrat-Bold.ttf",
@@ -85,21 +99,31 @@ class ImageService:
         
         if card_number == 1:
             # Card 1: Title + Source (centered vertically and horizontally)
+            # IMPORTANTE: Garantir que fonte está em LINHA SEPARADA
             lines = text.split('\n', 1)
-            title = lines[0] if lines else text
-            source = lines[1] if len(lines) > 1 else ""
+            title = lines[0].strip() if lines else text
+            source = lines[1].strip() if len(lines) > 1 else ""
             
             # Wrap title text with generous padding for readability
             title_lines = self._wrap_text(title, font, width - 300)
             
             # Calculate line heights
-            title_line_height = font.size + 20  # Tighter spacing for title
-            source_line_height = font.size + 10  # Even tighter for source
+            title_line_height = font.size + 20  # Spacing for title
+            source_gap = 60  # MAIOR gap antes da fonte para separação visual clara
+            
+            # Source font - MENOR que título para hierarquia visual
+            try:
+                source_font_size = int(font.size * 0.7)  # 70% do tamanho do título
+                source_font = ImageFont.truetype(font.path, source_font_size)
+            except:
+                source_font = font
             
             # Calculate total height
             total_height = len(title_lines) * title_line_height
             if source:
-                total_height += title_line_height + source_line_height  # Gap + source line
+                bbox = draw.textbbox((0, 0), source, font=source_font)
+                source_height = bbox[3] - bbox[1]
+                total_height += source_gap + source_height
             
             # Start Y position (centered vertically)
             y = (height - total_height) // 2
@@ -109,15 +133,11 @@ class ImageService:
                 self._draw_text_with_stroke(draw, line, font, width, y, (255, 255, 255), (0, 0, 0))
                 y += title_line_height
             
-            # Draw source (BRIGHT ORANGE with black stroke)
+            # Draw source (LARANJA VIBRANTE com black stroke) em LINHA SEPARADA
             if source:
-                y += 40  # Bigger gap before source
-                # Use smaller font for source
-                try:
-                    source_font = ImageFont.truetype(font.path, int(font.size * 0.8))
-                except:
-                    source_font = font
-                self._draw_text_with_stroke(draw, source, source_font, width, y, (255, 140, 0), (0, 0, 0))
+                y += source_gap  # Gap grande para separação clara
+                # COR LARANJA VIBRANTE: RGB(255, 120, 0) - alaranjado forte
+                self._draw_text_with_stroke(draw, source, source_font, width, y, (255, 120, 0), (0, 0, 0))
         
         else:
             # Cards 2-7: UPPER THIRD (avoiding TikTok icons at top)
@@ -381,6 +401,7 @@ class ImageService:
     def _generate_diffusers(self, prompt: str) -> str:
         """
         Generate using Juggernaut XL Lightning with Optimized Workflow (512x768 + Upscale)
+        Fixed for GTX 1060 6GB - Stable CUDA handling
         """
         try:
             import torch
@@ -390,24 +411,56 @@ class ImageService:
 
         # Lazy load pipeline if not already loaded
         if not hasattr(self, 'diffusers_pipe') or self.diffusers_pipe is None:
-            logger.info("Initializing Juggernaut XL Lightning (Optimized)...")
+            logger.info("Initializing Juggernaut XL Lightning (GTX 1060 Optimized)...")
             
-            # Determine device
-            self.device = "cuda" if torch.cuda.is_available() else "cpu"
-            dtype = torch.float16 if self.device == "cuda" else torch.float32
-            
-            # Load pipeline - Juggernaut XL Lightning
-            # Don't use variant parameter to avoid fp16 file not found errors
-            self.diffusers_pipe = AutoPipelineForText2Image.from_pretrained(
-                "RunDiffusion/Juggernaut-XL-Lightning", 
-                torch_dtype=dtype,
-                low_cpu_mem_usage=True
-            )
-            
-            # GTX 1060 Optimization: Offload to CPU
-            if self.device == "cuda":
-                self.diffusers_pipe.enable_model_cpu_offload()
-                self.diffusers_pipe.enable_vae_tiling()
+            # Try CUDA first, fallback to CPU if it fails
+            try:
+                if torch.cuda.is_available():
+                    self.device = "cuda"
+                    dtype = torch.float16
+                    logger.info("CUDA available - attempting GPU generation")
+                else:
+                    self.device = "cpu"
+                    dtype = torch.float32
+                    logger.info("CUDA not available - using CPU")
+                
+                # Load pipeline - Juggernaut XL Lightning
+                self.diffusers_pipe = AutoPipelineForText2Image.from_pretrained(
+                    "RunDiffusion/Juggernaut-XL-Lightning", 
+                    torch_dtype=dtype,
+                    low_cpu_mem_usage=True
+                )
+                
+                # GTX 1060 6GB: Use SEQUENTIAL CPU offload (more stable)
+                # This avoids the '_hf_hook' error
+                if self.device == "cuda":
+                    try:
+                        logger.info("Enabling sequential CPU offload for GTX 1060...")
+                        # Sequential offload is more stable than model_cpu_offload
+                        self.diffusers_pipe.enable_sequential_cpu_offload()
+                        self.diffusers_pipe.enable_vae_tiling()  # Reduces VRAM usage
+                        logger.info("✅ GPU offload configured successfully")
+                    except Exception as offload_error:
+                        logger.warning(f"GPU offload failed: {offload_error}. Falling back to CPU...")
+                        self.device = "cpu"
+                        self.diffusers_pipe.to("cpu")
+                else:
+                    # CPU mode
+                    self.diffusers_pipe.to("cpu")
+                
+            except Exception as cuda_error:
+                # CUDA initialization failed - force CPU
+                logger.error(f"CUDA initialization failed: {cuda_error}")
+                logger.info("Forcing CPU mode for stability...")
+                self.device = "cpu"
+                dtype = torch.float32
+                
+                self.diffusers_pipe = AutoPipelineForText2Image.from_pretrained(
+                    "RunDiffusion/Juggernaut-XL-Lightning", 
+                    torch_dtype=dtype,
+                    low_cpu_mem_usage=True
+                )
+                self.diffusers_pipe.to("cpu")
             
             # Scheduler: DPM++ 2M Karras (User Request)
             self.diffusers_pipe.scheduler = DPMSolverMultistepScheduler.from_config(

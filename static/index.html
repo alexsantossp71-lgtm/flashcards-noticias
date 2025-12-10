@@ -119,14 +119,28 @@
 
     <script>
         const API_URL = 'http://127.0.0.1:8000';
-        const CATEGORIES = ['Brasil', 'Mundo', 'Política', 'Esportes', 'Tecnologia', 'Economia'];
+        const CATEGORIES = [
+            // Categorias Gerais
+            'Brasil', 'Mundo', 'Política',
+            // Categorias Específicas
+            'Esportes', 'Tecnologia', 'Economia',
+            // Fontes por Veículo
+            'UOL', 'Terra', 'Estadão', 'Veja', 'G1',
+            'BBC Brasil', 'DW Brasil', 'Carta Capital'
+        ];
         const STYLES = [
             { name: '3D Pixar', prompt: '3D Pixar style, colorful, vibrant, cartoon', image: 'assets/style_3d_pixar.png' },
             { name: 'Realista', prompt: 'photorealistic, high quality, detailed, professional photography', image: 'assets/style_realista.png' },
             { name: 'Anime', prompt: 'anime style, manga, vibrant colors, detailed', image: 'assets/style_anime.png' },
             { name: 'Minimalista', prompt: 'minimalist, clean, simple, modern design', image: 'assets/style_minimalista.png' },
             { name: 'Cyberpunk', prompt: 'cyberpunk style, neon, futuristic, dark', image: 'assets/style_cyberpunk.png' },
-            { name: 'Aquarela', prompt: 'watercolor painting, artistic, soft colors', image: 'assets/style_aquarela.png' }
+            { name: 'Aquarela', prompt: 'watercolor painting, artistic, soft colors', image: 'assets/style_aquarela.png' },
+            { name: 'Fotojornalismo', prompt: 'photojournalistic style, realistic news photography, documentary, candid, natural lighting', image: 'assets/style_realista.png' },
+            { name: 'Desenho Editorial', prompt: 'editorial cartoon illustration, bold lines, satirical, political cartoon style', image: 'assets/style_minimalista.png' },
+            { name: 'Impressionismo Digital', prompt: 'digital impressionism, painterly, soft brush strokes, artistic interpretation', image: 'assets/style_aquarela.png' },
+            { name: 'Pop Art', prompt: 'pop art style, bold colors, comic book aesthetic, halftone dots, vibrant', image: 'assets/style_3d_pixar.png' },
+            { name: 'Grunge', prompt: 'grunge aesthetic, gritty, textured, dark mood, urban', image: 'assets/style_cyberpunk.png' },
+            { name: 'Vintage Poster', prompt: 'vintage poster design, retro, classic advertisement style, aged paper texture', image: 'assets/style_minimalista.png' }
         ];
 
         let selectedHeadline = null;
@@ -369,7 +383,9 @@
 
                         currentFlashcards.push({
                             text: card.text,
-                            imageBase64: imageData.imageBase64
+                            imagePrompt: card.imagePrompt || '',  // ✅ INCLUIR imagePrompt
+                            imageBase64: imageData.imageBase64,
+                            imageSource: 'local'
                         });
                     } catch (err) {
                         console.error(`Erro no card ${i + 1}:`, err);
@@ -380,6 +396,10 @@
                 showLoading('Concluído!', '✅ Flashcards prontos!', 100);
                 await new Promise(r => setTimeout(r, 1000));
                 hideLoading();
+
+                // ✅ AUTO-SAVE: Salvar automaticamente após geração
+                console.log('🔄 Salvando automaticamente...');
+                await saveFlashcardsAuto();
 
             } catch (error) {
                 hideLoading();
@@ -402,9 +422,9 @@
                     tiktokSummary: document.getElementById('tiktok-summary').textContent,
                     cards: currentFlashcards.map((card, index) => ({
                         text: card.text,
-                        imagePrompt: card.imagePrompt || '', // Garantir que campo exista
+                        imagePrompt: card.imagePrompt,  // ✅ Agora vem do card
                         imageBase64: card.imageBase64,
-                        imageSource: 'local'
+                        imageSource: card.imageSource
                     })),
                     generationTime: 0,
                     modelUsed: {}
@@ -425,6 +445,91 @@
                 console.error(error);
                 alert('Erro ao salvar: ' + error.message);
             }
+        }
+
+        async function saveFlashcardsAuto() {
+            // ✅ AUTO-SAVE: Versão automática que salva e faz push para GitHub
+            if (currentFlashcards.length === 0) return;
+
+            try {
+                showLoading('Auto-Salvando', '💾 Salvando post...', 50);
+
+                const postData = {
+                    category: 'Geral',
+                    headline: selectedHeadline.headline,
+                    source: selectedHeadline.source,
+                    url: selectedHeadline.url || '',
+                    tiktokTitle: document.getElementById('tiktok-title').textContent,
+                    tiktokSummary: document.getElementById('tiktok-summary').textContent,
+                    cards: currentFlashcards.map((card, index) => ({
+                        text: card.text,
+                        imagePrompt: card.imagePrompt,
+                        imageBase64: card.imageBase64,
+                        imageSource: card.imageSource
+                    })),
+                    generationTime: 0,
+                    modelUsed: {}
+                };
+
+                const response = await fetch(`${API_URL}/api/save-post`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(postData)
+                });
+
+                if (!response.ok) throw new Error('Erro ao salvar no servidor');
+
+                const saveResult = await response.json();
+                console.log('✅ Post salvo:', saveResult.id);
+
+                // ✅ AUTO-PUSH: Enviar para GitHub automaticamente
+                showLoading('Auto-Publicando', '📤 Enviando para GitHub...', 75);
+
+                try {
+                    const pushResponse = await fetch(`${API_URL}/api/push-to-github`, {
+                        method: 'POST'
+                    });
+
+                    if (pushResponse.ok) {
+                        const pushResult = await pushResponse.json();
+                        console.log('✅ Push para GitHub:', pushResult.message);
+
+                        showLoading('Publicado!', '✅ Cards no ar! Site atualizado.', 100);
+                        await new Promise(r => setTimeout(r, 2000));
+
+                        // Mostrar mensagem de sucesso discreta
+                        showSuccessToast('✅ Salvo e publicado automaticamente!');
+                    } else {
+                        console.warn('⚠️ Push falhou, mas post foi salvo localmente');
+                        showSuccessToast('✅ Salvo localmente (push manual necessário)');
+                    }
+                } catch (pushError) {
+                    console.warn('⚠️ Push error:', pushError);
+                    showSuccessToast('✅ Salvo localmente');
+                }
+
+                hideLoading();
+
+            } catch (error) {
+                hideLoading();
+                console.error('Auto-save error:', error);
+                // Não mostrar alert para não interromper UX
+                showSuccessToast('⚠️ Erro ao salvar automaticamente');
+            }
+        }
+
+        function showSuccessToast(message) {
+            // Toast notification não intrusivo
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-4 right-4 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg border border-sky-500 z-50 animate-fade-in';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
         }
 
         async function showSavedPosts() {

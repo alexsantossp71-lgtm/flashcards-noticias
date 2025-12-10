@@ -68,7 +68,8 @@ class StorageService:
         tiktok_summary: str,
         cards: List[Dict],  # [{text, imagePrompt, imageBase64, imageSource}]
         generation_time: float,
-        models_used: Dict
+        models_used: Dict,
+        article_date: Optional[str] = None  # ✅ NOVO: Data da notícia
     ) -> Dict:
         """
         Save a complete post to filesystem
@@ -101,6 +102,7 @@ class StorageService:
         metadata = {
             "id": post_id,
             "timestamp": timestamp.isoformat(),
+            "articleDate": article_date or timestamp.strftime("%Y-%m-%d"),  # ✅ NOVO
             "category": category,
             "headline": headline,
             "source": source,

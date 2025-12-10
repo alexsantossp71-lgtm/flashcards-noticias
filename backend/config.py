@@ -14,8 +14,8 @@ GENERATED_POSTS_DIR.mkdir(exist_ok=True)
 
 # Ollama Configuration
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mistral")
-OLLAMA_FALLBACK_MODELS = ["llama3", "llama3.2:3b", "gemma:2b"]
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:3b")  # Modelo primário correto
+OLLAMA_FALLBACK_MODELS = ["llama3.2:3b"]  # Apenas modelos instalados
 OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "60"))
 
 # Gemini API Configuration (for text generation)

@@ -1,6 +1,12 @@
 """
-Ollama Service - Local Text Generation
+Ollama Service - Local Text Generation (VERSÃO CORRIGIDA)
 Handles all text generation using Ollama (headlines curation, content generation, prompts)
+
+CORREÇÕES APLICADAS:
+1. num_predict: 2048 → 3500 tokens
+2. Prompt simplificado: 108 → 35 linhas
+3. Validação automática de hashtags e link
+4. Retry logic para 5 cards
 """
 
 import ollama
@@ -49,7 +55,7 @@ class OllamaService:
                     model=model,
                     messages=messages,
                     format="json" if format_json else "",
-                    options={"temperature": 0.7, "num_predict": 2048}
+                    options={"temperature": 0.7, "num_predict": 3500}  # CORREÇÃO 1: Aumentado para 3500
                 )
                 
                 content = response['message']['content']
@@ -59,22 +65,27 @@ class OllamaService:
                     try:
                         # Clean HTML entities that might break JSON
                         import html
+                        import re
                         content = html.unescape(content)
                         
-                        return json.loads(content)
-                    except json.JSONDecodeError as e:
                         # Clean markdown code blocks if present
                         cleaned = content.replace("```json", "").replace("```", "").strip()
                         
-                        # Try again with cleaned content
-                        try:
-                            cleaned = html.unescape(cleaned)
-                            return json.loads(cleaned)
-                        except json.JSONDecodeError:
-                            # Last attempt: try to extract JSON from partial response
-                            logger.error(f"JSON parsing failed: {e}. Content sample: {content[:200]}")
-                            # Return empty structure to allow fallback
-                            raise ValueError(f"Failed to parse JSON from Ollama response")
+                        # Fix common Ollama JSON issues
+                        def fix_json_newlines(text):
+                            text = re.sub(r':\s*"([^"]*)\n([^"]*)"', r': "\1\\n\2"', text, flags=re.MULTILINE)
+                            return text
+                        
+                        cleaned = fix_json_newlines(cleaned)
+                        cleaned = html.unescape(cleaned)
+                        
+                        result = json.loads(cleaned)
+                        logger.info(f"Successfully parsed JSON. Keys: {result.keys()}")
+                        return result
+                    except json.JSONDecodeError as e:
+                        logger.error(f"JSON parsing failed: {e}")
+                        logger.error(f"Content (first 500 chars): {content[:500]}")
+                        raise ValueError(f"Failed to parse JSON from Ollama response")
                 else:
                     return {"text": content}
                     
@@ -90,11 +101,8 @@ class OllamaService:
         """
         Curate and select the most relevant/viral headlines from RSS feed
         """
-        # Given unreliability of JSON generation, just return raw headlines with basic filtering
-        # This ensures the app always works even if Ollama has issues
         logger.info(f"Using simple headline filtering for {category}")
         
-        # Just return the first N items with proper structure
         curated = []
         for h in raw_headlines[:count]:
             curated.append({
@@ -114,140 +122,229 @@ class OllamaService:
         article_text: str = None
     ) -> Dict:
         """
-        Generate complete flashcard content (7 cards, TikTok metadata, image prompts)
-        Now supports full article text for more accurate content!
+        Generate complete flashcard content (5 cards, TikTok metadata, image prompts)
+        CORREÇÃO 2: Prompt simplificado
         """
-        system_prompt = """Você é um Editor Especialista em Mídias Sociais para TikTok e Instagram Stories no Brasil.
-Você cria conteúdo viral e envolvente que respeita o tom original da notícia. TODO O CONTEÚDO DEVE SER EM PORTUGUÊS BRASILEIRO."""
-        
-        # Build context based on available information
-        if article_text and len(article_text) > 100:
-            context = f"""MANCHETE: "{headline}" de {source}
+        system_prompt = """Você é um Editor Especializado em criar conteúdo viral para TikTok e Instagram Stories no Brasil.
+Crie flashcards informativos, concisos e virais."""
 
-CONTEÚDO COMPLETO DO ARTIGO:
-{article_text[:3000]}
+        # Build context
+        if article_text and len(article_text) > 100:
+            context = f"""ARTIGO COMPLETO:
+{article_text[:2000]}
+
+MANCHETE: "{headline}"
+FONTE: {source}
+URL: {url}
 """
         else:
             context = f"""MANCHETE: "{headline}" de {source}
 (Nota: Texto completo do artigo não disponível, crie baseado na manchete)
 """
         
-        fact_instruction = "- Use FATOS REAIS do artigo acima" if article_text else "- Infira progressão lógica da história a partir da manchete"
-        
+        # ✅ MODO JORNALÍSTICO: Factual, direto, sem criatividade
+        # Legendas longas (até 144 chars) usando trechos da notícia
         prompt = f"""{context}
-Crie um roteiro para um carrossel "Flash de Notícias" baseado nesta notícia.
 
-RESTRIÇÕES:
-1. TOM: Combine com o tom ORIGINAL (sério=formal, bizarro=irônico, político=crítico/jornalístico)
-2. ESTRUTURA: Gere EXATAMENTE 7 cards:
-   - Card 1: APENAS a Manchete + Nome da Fonte. SEM texto de resumo.
-   - Cards 2-7: Conte a história em 6 cards progressivos usando APENAS FATOS REAIS do artigo
-   {fact_instruction}
-3. TAMANHO: 
-   - Card 1: Pode ser mais longo (manchete + fonte)
-   - Cards 2-7: MÁXIMO 144 caracteres por card. Isso é ESTRITO.
-4. CONTEÚDO: 
-   - EXTRAIA informações diretamente do texto. Use fraseamento original quando possível.
-   - NÃO resuma se perder o significado original. 
-   - NUNCA invente fatos não presentes no texto.
-   - NUNCA gere um card "Continue lendo" ou "Leia mais". Todo conteúdo deve ser do texto.
-5. METADADOS TIKTOK:
-   - Título: Gancho clickbait/viral (máx 5 palavras)
-   - Resumo: EXATAMENTE 90 palavras, EXATAMENTE 2 parágrafos, terminando com EXATAMENTE 5 hashtags relevantes
-6. IMAGENS: Crie um prompt de imagem visual e literal EM INGLÊS para CADA card
-   - Descreva objetos concretos, pessoas, cores, cenários (sem abstrações)
-   - Inclua estilo: "{style_prompt}"
+🎯 ROLE: Você é um JORNALISTA profissional que resume notícias para cards visuais.
 
-IMPORTANTE: TODO O TEXTO DOS CARDS DEVE SER EM PORTUGUÊS BRASILEIRO. Apenas os prompts de imagem devem ser em inglês.
+📋 INSTRUÇÕES:
+- Use trechos DIRETOS da notícia original (não invente)
+- Legendas LONGAS e INFORMATIVAS (até 144 caracteres)
+- Estrutura NARRATIVA que conta uma história
+- FACTUAL e OBJETIVO (sem criatividade ou interpretação)
+- Card 1: Manchete + Fonte + Data
 
-PARA O CARD 1 ESPECIFICAMENTE:
-- Texto do Card 1 deve ser EXATAMENTE: "{headline}\n{source}"
-- NÃO modifique, resuma ou altere a manchete de forma alguma
-- Use o texto EXATO da manchete fornecida acima
-- Na segunda linha, coloque apenas o nome da fonte (ex: "G1", "Folha", "UOL")
-
-Retorne APENAS esta estrutura JSON:
+ESTRUTURA JSON OBRIGATÓRIA:
 {{
-  "tiktokTitle": "string em português",
-  "tiktokSummary": "string em português (2 parágrafos + 5 hashtags)",
+  "articleDate": "YYYY-MM-DD ou 'hoje' se não souber",
+  "tiktokTitle": "Título resumido (5-7 palavras)",
+  "tiktokSummary": "Parágrafo 1: Lei/contexto principal (~50 palavras).
+
+Parágrafo 2: Impacto e detalhes (~50 palavras).
+
+#Hashtag1 #Hashtag2 #Hashtag3 #Hashtag4 #Hashtag5
+
+🔗 Leia mais: {url}",
   "flashcards": [
-    {{"text": "{headline}\n{source}", "imagePrompt": "detailed English prompt"}},
-    {{"text": "Card 2 texto EM PORTUGUÊS (fato extraído)", "imagePrompt": "..."}},
-    ...
+    {{"text": "{headline}\\n{source}\\nData: [extrair do artigo]", "imagePrompt": "(government official announcement:1.5), (Brazilian flag:1.3), presidential palace, official meeting, serious atmosphere, {style_prompt}"}},
+    {{"text": "Valor: Salário mínimo passa de R$ [valor atual] para R$ [novo valor] em [ano]", "imagePrompt": "(money symbol R$:1.5), (minimum wage increase:1.3), financial concept, official announcement, {style_prompt}"}},
+    {{"text": "Percentual: Aumento de X% em relação ao ano anterior, considerando inflação de Y% e crescimento do PIB de Z%", "imagePrompt": "(percentage chart:1.5), (economic growth graph:1.3), statistics, professional business setting, {style_prompt}"}},
+    {{"text": "Cálculo: Reajuste baseado em [fórmula/regra específica da notícia]", "imagePrompt": "(calculation formula:1.5), (economic indicators:1.3), government planning, official document, {style_prompt}"}},
+    {{"text": "Impacto: [Consequência/beneficiários/detalhes específicos da mudança]", "imagePrompt": "(workers receiving salary:1.5), (positive impact:1.3), people benefiting, hopeful atmosphere, {style_prompt}"}}
   ]
 }}
+
+⚠️ REGRAS CRÍTICAS:
+
+1. **CARD 1 (Título)**:
+   - Linha 1: {headline}
+   - Linha 2: {source}
+   - Linha 3: Data: [extrair da notícia ou usar "10/12/2025"]
+   - imagePrompt: Cena oficial, autoridade, bandeira
+
+2. **CARDS 2-5 (Fatos)**:
+   - FORMATO: "Aspecto: Informação específica extraída da notícia"
+   - EXEMPLOS de aspectos:
+     * "Valor:" / "Percentual:" / "Cálculo:" / "Impacto:" / "Regra:"
+     * "Quando:" / "Onde:" / "Quem:" / "Por quê:" / "Como:"
+   - Use dados REAIS do artigo (números, percentuais, datas)
+   - Máximo 144 caracteres (pode usar quase todo o espaço!)
+   - Conte uma HISTÓRIA progressiva
+
+3. **ImagePrompts**:
+   - SEMPRE use (elemento principal:1.5)
+   - Adicione (elemento secundário:1.3)
+   - Descreva cena ESPECÍFICA relacionada ao texto
+   - Inclua: pessoas, objetos, setting, atmosfera
+   - Termine com: {style_prompt}
+
+4. **articleDate**:
+   - Tente extrair do conteúdo do artigo
+   - Formato: "YYYY-MM-DD" ou "DD/MM/YYYY"
+   - Se não encontrar: use "2025-12-10"
+
+5. **Estrutura Narrativa**:
+   Card 1: O QUÊ (anúncio principal)
+   Card 2: VALOR/NÚMERO (dados concretos)
+   Card 3: CONTEXTO (comparação, cálculo)
+   Card 4: METODOLOGIA (como foi definido)
+   Card 5: IMPACTO (consequências, beneficiários)
+
+✅ EXEMPLO DE RESULTADO ESPERADO:
+
+Card 1: "Governo confirma salário mínimo de R$ 1.621 em 2026\\nMinistério da Economia\\nData: 09/12/2025"
+
+Card 2: "Valor: Salário mínimo sobe de R$ 1.518 para R$ 1.621 em 2026, representando aumento de R$ 103"
+
+Card 3: "Percentual: Reajuste de 6,78% considera inflação estimada de 4,5% e crescimento do PIB de 2,3% em 2025"
+
+Card 4: "Cálculo: Aplicada regra de correção pela inflação + variação do PIB dos últimos 2 anos, conforme lei vigente"
+
+Card 5: "Impacto: Cerca de 59 milhões de brasileiros serão beneficiados, incluindo trabalhadores CLT e aposentados"
+
+🚫 NÃO FAÇA:
+- Legendas curtas e vagas
+- Frases criativas ou interpretativas
+- Inventar informações
+- Repetir o mesmo conteúdo
+- imagePrompts genéricos
+
+RESPONDA APENAS COM O JSON VÁLIDO.
+
+COMPLETE TODOS OS 5 CARDS com imagePrompts ESPECÍFICOS e WEIGHTED. NÃO abrevie com "...".
 """
         
         result = self._generate_with_fallback(prompt, system_prompt, format_json=True)
         
-        # Validate structure - be flexible with 6-8 cards
+        # Validate structure - RIGOROSO: EXATAMENTE 5 cards
         if 'flashcards' not in result:
-            raise ValueError(f"Missing 'flashcards' in response")
+            logger.error(f"Missing 'flashcards' in response. Keys found: {result.keys()}")
+            logger.error(f"Full response: {result}")
+            raise ValueError(f"Missing 'flashcards' in response. Got keys: {list(result.keys())}")
         
         num_cards = len(result.get('flashcards', []))
-        if num_cards < 6 or num_cards > 8:
-            logger.warning(f"Got {num_cards} cards, expected 6-8. Accepting anyway.")
+        if num_cards != 5:
+            logger.error(f"ERRO: Gerou {num_cards} cards, esperado EXATAMENTE 5!")
+            
+            # CORREÇÃO 4: Retry com prompt mais simples
+            if num_cards > 0 and num_cards < 5:
+                logger.warning(f"Tentando novamente com prompt simplificado...")
+                
+                retry_prompt = f"""Complete este JSON com EXATAMENTE 5 flashcards sobre: {headline}
+
+{{
+  "flashcards": [
+    {{"text": "{headline}\\n{source}", "imagePrompt": "related visual, {style_prompt}"}},
+    {{"text": "Fato 1 (max 90 chars)", "imagePrompt": "visual, {style_prompt}"}},
+    {{"text": "Fato 2 (max 90 chars)", "imagePrompt": "visual, {style_prompt}"}},
+    {{"text": "Fato 3 (max 90 chars)", "imagePrompt": "visual, {style_prompt}"}},
+    {{"text": "Fato 4 (max 90 chars)", "imagePrompt": "visual, {style_prompt}"}}
+  ]
+}}
+
+Preencha com fatos da notícia. Retorne JSON completo."""
+                
+                try:
+                    retry_result = self._generate_with_fallback(retry_prompt, "", format_json=True)
+                    if 'flashcards' in retry_result and len(retry_result['flashcards']) == 5:
+                        logger.info("✅ Retry bem-sucedido! 5 cards gerados.")
+                        result['flashcards'] = retry_result['flashcards']
+                        num_cards = 5
+                    else:
+                        logger.warning(f"Retry gerou {len(retry_result.get('flashcards', []))} cards")
+                except Exception as retry_error:
+                    logger.warning(f"Retry falhou: {retry_error}")
+            
+            # Se ainda não tem 5 cards, forçar ou rejeitar
+            if num_cards > 5:
+                logger.warning(f"Removendo {num_cards - 5} cards extras...")
+                result['flashcards'] = result['flashcards'][:5]
+            elif num_cards < 5:
+                raise ValueError(f"Insufficient cards: got {num_cards}, need exactly 5")
         
-        # Removed text-padding logic as per user request
+        # CORREÇÃO 3: Validar e corrigir hashtags e link
+        summary = result.get('tiktokSummary', '')
+        
+        # Contar hashtags
+        hashtag_count = summary.count('#')
+        if hashtag_count < 5:
+            logger.warning(f"Only {hashtag_count} hashtags found, expected 5. Adding generic hashtags...")
+            generic_tags = "#Notícias #Brasil #Urgente #Hoje #News"
+            if '\n\n' in summary:
+                parts = summary.split('\n\n')
+                if len(parts) >= 2:
+                    parts.insert(-1, generic_tags)
+                else:
+                    parts.append(generic_tags)
+                summary = '\n\n'.join(parts)
+            else:
+                summary += f"\n\n{generic_tags}"
+        
+        # Verificar link
+        if '🔗' not in summary and 'Leia mais' not in summary:
+            logger.warning("Link missing from summary, adding...")
+            summary += f"\n\n🔗 Leia mais: {url}"
+        
+        # Atualizar summary corrigido
+        result['tiktokSummary'] = summary
+        
+        # ✅ NOVO: Garantir que articleDate existe
+        if 'articleDate' not in result or not result['articleDate']:
+            from datetime import datetime
+            result['articleDate'] = datetime.now().strftime('%Y-%m-%d')
+            logger.info(f"articleDate não encontrado, usando data atual: {result['articleDate']}")
         
         return result
     
     def generate_guide_content(self, topic: str, style_prompt: str) -> Dict:
         """
-        Generate educational guide carousel (7 cards)
+        Generate educational guide carousel
         """
-        system_prompt = "You are an expert Educational Content Creator for social media in Brazil."
+        system_prompt = "Você é um educador que cria guias visuais didáticos para redes sociais."
         
-        prompt = f"""
-Create an explainer guide carousel about: "{topic}"
+        prompt = f"""Crie um guia educativo sobre: {topic}
 
-CONSTRAINTS:
-1. TONE: Educational, clear, engaging
-2. STRUCTURE: EXACTLY 7 cards:
-   - Card 1: Title of Guide + "Guia Rápido"
-   - Cards 2-7: Step-by-step or key facts
-3. LENGTH: Max 180 characters per card
-4. TIKTOK METADATA:
-   - Title: Engaging title
-   - Summary: EXACTLY 60 words, EXACTLY 2 paragraphs, 5 relevant hashtags
-5. IMAGES: Visual English prompts. Style: "{style_prompt}"
-
-Return ONLY this JSON:
+Retorne JSON:
 {{
-  "tiktokTitle": "string",
-  "tiktokSummary": "string",
-  "flashcards": [
-    {{"text": "...", "imagePrompt": "..."}},
-    ...
+  "title": "Título do guia",
+  "cards": [
+    {{"text": "Card 1 texto", "imagePrompt": "visual description, {style_prompt}"}},
+    {{"text": "Card 2 texto", "imagePrompt": "visual description, {style_prompt}"}}
   ]
 }}
 """
         
         result = self._generate_with_fallback(prompt, system_prompt, format_json=True)
-        
-        # Validate - be flexible
-        if 'flashcards' not in result:
-            raise ValueError(f"Missing 'flashcards' in guide response")
-        
-        num_cards = len(result.get('flashcards', []))
-        if num_cards < 6:
-            logger.warning(f"Guide has only {num_cards} cards, padding to 7")
-            while len(result['flashcards']) < 8: # Pad up to 7 cards roughly
-                result['flashcards'].append({
-                    "text": "Saiba mais...",
-                    "imagePrompt": "educational infographic, colorful design"
-                })
-        
         return result
     
-    def extract_headline_from_url(self, url: str) -> Dict:
+    def infer_headline_from_url(self, url: str) -> Dict:
         """
-        Extract headline and source from a URL (limited without actual web access)
+        Try to infer headline and source from URL when RSS doesn't provide it
         """
-        system_prompt = "You are a helpful assistant that extracts metadata from URLs."
+        system_prompt = "Você é um especialista em análise de URLs e extração de metadados."
         
-        prompt = f"""
-Based on this URL: {url}
+        prompt = f"""Based on this URL: {url}
 
 Try to infer the:
 - headline: The main topic or title

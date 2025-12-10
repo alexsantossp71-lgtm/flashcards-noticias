@@ -20,6 +20,15 @@ if /i not "%CONFIRM%"=="s" (
 )
 
 echo.
+echo Gerando index posts.json...
+python generate_posts_index.py
+
+if errorlevel 1 (
+    echo.
+    echo AVISO: Erro ao gerar posts.json, mas continuando...
+)
+
+echo.
 echo Adicionando arquivos...
 git add generated_posts/
 

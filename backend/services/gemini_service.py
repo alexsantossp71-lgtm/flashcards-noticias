@@ -72,33 +72,38 @@ RESTRIÇÕES:
    - Card 1: APENAS a Manchete + Nome da Fonte. SEM texto de resumo.
    - Cards 2-7: Conte a história em 6 cards progressivos usando APENAS FATOS REAIS do artigo
    {fact_instruction}
-3. TAMANHO: 
-   - Card 1: Pode ser mais longo (manchete + fonte)
-   - Cards 2-7: MÁXIMO 144 caracteres por card. Isso é ESTRITO.
-4. CONTEÚDO: 
-   - EXTRAIA informações diretamente do texto. Use fraseamento original quando possível.
-   - NÃO resuma se perder o significado original. 
-   - NUNCA invente fatos não presentes no texto.
-   - NUNCA gere um card "Continue lendo" ou "Leia mais". Todo conteúdo deve ser do texto.
-5. METADADOS TIKTOK:
-   - Título: Gancho clickbait/viral (máx 5 palavras)
-   - Resumo: EXATAMENTE 90 palavras, EXATAMENTE 2 parágrafos, terminando com EXATAMENTE 5 hashtags relevantes
-6. IMAGENS: Crie um prompt de imagem visual e literal EM INGLÊS para CADA card
-   - Descreva objetos concretos, pessoas, cores, cenários (sem abstrações)
-   - Inclua estilo: "{style_prompt}"
 
-IMPORTANTE: TODO O TEXTO DOS CARDS DEVE SER EM PORTUGUÊS BRASILEIRO. Apenas os prompts de imagem devem ser em inglês.
+3. TAMANHO DOS CARDS 2-7:
+   - MÁXIMO 90 caracteres por card (incluindo espaços e pontuação)
+   - Isso garante NO MÁXIMO 4 linhas de texto quando renderizado
+   - Conte cada caractere. Seja EXTREMAMENTE conciso.
 
-PARA O CARD 1 ESPECIFICAMENTE:
-- Texto do Card 1 deve ser EXATAMENTE: "{headline}\\n{source}"
-- NÃO modifique, resuma ou altere a manchete de forma alguma
-- Use o texto EXATO da manchete fornecida acima
-- Na segunda linha, coloque apenas o nome da fonte (ex: "G1", "Folha", "UOL")
+4. CONTEÚDO DOS CARDS 2-7 (CRÍTICO):
+   - Cada card deve ser um RESUMO CONCISO de um fato específico da notícia
+   - Use o TOM ORIGINAL do artigo (sério=formal, bizarro=irônico, político=jornalístico)
+   - EXTRAIA informações diretamente do texto. Use fraseamento fiel ao original.
+   - Seja DIRETO e OBJETIVO. Vá direto ao ponto.
+   - Máximo 4 linhas = 90 caracteres
+   - NUNCA use frases genéricas como "Continue lendo", "Leia mais", "Saiba mais"
+   - NUNCA invente fatos. Use APENAS informações do artigo.
+   - Cada card deve adicionar uma nova informação relevante da história.
+
+5. PROMPTS DE IMAGEM (CRÍTICO):
+   - LEIA o texto do card antes de criar o prompt
+   - O prompt da imagem DEVE REFLETIR o conteúdo ESPECÍFICO do card
+   - Use informações do artigo completo para enriquecer o prompt visual
+   - Descreva: pessoas, objetos, ações, cenários, cores, emoções
+   - Seja LITERAL e VISUAL (evite conceitos abstratos)
+   - LIMITE: MÁXIMO 200 caracteres (o estilo será adicionado depois)
+
+#Hashtag1 #Hashtag2 #Hashtag3 #Hashtag4 #Hashtag5
+
+🔗 Leia mais: {url}
 
 Retorne APENAS esta estrutura JSON:
 {{
   "tiktokTitle": "string em português",
-  "tiktokSummary": "string em português (2 parágrafos + 5 hashtags)",
+  "tiktokSummary": "2 parágrafos + 5 hashtags (formato: #Tag1 #Tag2 #Tag3 #Tag4 #Tag5) + link (🔗 Leia mais: URL)",
   "flashcards": [
     {{"text": "{headline}\\n{source}", "imagePrompt": "detailed English prompt"}},
     {{"text": "Card 2 texto EM PORTUGUÊS (fato extraído)", "imagePrompt": "..."}},
