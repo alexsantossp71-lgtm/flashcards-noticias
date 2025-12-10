@@ -1,0 +1,56 @@
+{
+  "id": "geral_20251209_084243",
+  "timestamp": "2025-12-09T08:42:43.274670",
+  "category": "Geral",
+  "headline": "Mundo pode registrar primeira alta em mortes infantis em 25 anos",
+  "source": "G1",
+  "url": "https://g1.globo.com/saude/noticia/2025/12/09/mundo-pode-registrar-primeira-alta-em-mortes-infantis-em-25-anos.ghtml",
+  "tiktokTitle": "Mundo alerta: Mortes infantis podem aumentar em 25 anos",
+  "tiktokSummary": "[O mundo enfrentaria um aumento nas mortes de crianças menores de 5 anos, devido a uma combinação de fatores] #SaúdeInfantil #Vacinação #MorteInfantis #G1 #DesafiosSustentáveis",
+  "cards": [
+    {
+      "text": "Mundo pode registrar primeira alta em mortes infantis em 25 anos G1",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "A mortalidade infantil está prestes a voltar a subir devido a uma combinação de fatores, incluindo queda nas coberturas vacinais e fracos sistemas de saúde",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "O relatório Goalkeepers 2025 da Fundação Gates estima um aumento de 4,6 milhões de mortes em 2024 para 4,8 milhões em 2025",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "A baixa adesão a vacinas que já estão disponíveis leva a um aumento imediato de internações e mortes, especialmente entre não vacinados",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A combinação de fatores também inclui retorno de doenças evitáveis, insegurança alimentar e vulnerabilidade social, que afetam especialmente as crianças",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    },
+    {
+      "text": "O pediatra Renato Kfouri destaca que o cenário global reflete uma 'combinação perigosa' de fatores que pressionam todos os indicadores",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_6.png"
+    },
+    {
+      "text": "A mortalidade neonatal continua sendo um dos pontos mais críticos, com as principais causas de morte infantil ainda associadas à gestação, ao parto e às infecções preveníveis",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_7.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

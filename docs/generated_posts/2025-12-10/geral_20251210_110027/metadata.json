@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_110027",
+  "timestamp": "2025-12-10T11:00:27.476118",
+  "category": "Geral",
+  "headline": "Jovem armado morre em confronto com a polícia em Sarandi",
+  "source": "UOL",
+  "url": "https://tnonline.uol.com.br/noticias/parana/jovem-armado-morre-em-confronto-com-a-policia-em-sarandi-1048053",
+  "tiktokTitle": "Jovem armado morre em confronto com a polícia em Sarandi",
+  "tiktokSummary": "Um jovem de 19 anos morreu após ser baleado por policiais militares na Avenida Cuiabá, em Sarandi. A ocorrîncia foi atendida por equipes do 32º Batalhón da Policiªsmilitar. O pai do jovem relatou que ele estava envolvido com o tráfico de drogas e havia sido ameaçado de morte. Os policiais deram ordem verbal para que ele soltasse a arma, mas o jovem não obedeceu e teria feito menção de investir contra a equipe.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://tnonline.uol.com.br/noticias/parana/jovem-armado-morre-em-confronto-com-a-policia-em-sarandi-1048053",
+  "cards": [
+    {
+      "text": "Jovem armado morre em confronto com a polícia em Sarandi\nUOL",
+      "imagePrompt": "Um jovem de 19 anos, vestido com um casaco preto e uma camisa branca, segurando uma arma, sendo cercado por policiais militares na Avenida Cuiabá em Sarandi, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Fato 1: Jovem de 19 anos foi morto em confronto com a polícia",
+      "imagePrompt": "Uma equipe de policiais militares cercando uma residência na Avenida Cuiabá em Sarandi, com a porta fechada e as luzes apagadas, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Fato 2: Jovem estava envolvido com o tráfico de drogas",
+      "imagePrompt": "Um jovem segurando uma sacheta preta e vestido com um casaco preto, caminhou em direção a uma casa na Avenida Cuiabá em Sarandi, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Fato 3: Jovem foi ameaçado de morte",
+      "imagePrompt": "Uma pessoa segurando um papel com uma mensagem criminosa e caminhando em direção a uma casa na Avenida Cuiabá em Sarandi, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Fato 4: Policiais deram ordem verbal para que o jovem soltasse a arma",
+      "imagePrompt": "Um policial militar segurando um megafone e gritando, enquanto outro policial está apontando uma arma para o jovem na Avenida Cuiabá em Sarandi, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

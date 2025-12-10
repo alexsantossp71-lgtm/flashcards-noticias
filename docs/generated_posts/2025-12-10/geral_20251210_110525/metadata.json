@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_110525",
+  "timestamp": "2025-12-10T11:05:25.660396",
+  "category": "Geral",
+  "headline": "Congresso aprova reforma administrativa",
+  "source": "G1",
+  "url": "https://g1.globo.com/politica/noticia/2025/12/10/congresso-aprova-reforma-administrativa.ghtml",
+  "tiktokTitle": "Congresso aprova reforma administrativa",
+  "tiktokSummary": "O Congresso brasileiro aprovou uma reforma administrativa que visa modernizar o sistema público. A medida é considerada um passo importante para aumentar a eficiência e reduzir a burocracia no governo. 📊👍 Leia mais: https://g1.globo.com/politica/noticia/2025/12/10/congresso-aprova-reforma-administrativa.ghtml #Política #ReformaAdministrativa #GovernoBrasileiro #Congresso Nacional\n\n#Notícias #Brasil #Urgente #Hoje #News",
+  "cards": [
+    {
+      "text": "O Congresso brasileiro aprovou uma reforma administrativa que visa modernizar o sistema público.",
+      "imagePrompt": "Um mapa do Brasil com um estande do Congresso no centro, pessoas caminhando em frente ao parlimeneto",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "A medida é considerada um passo importante para aumentar a eficiência e reduzir a burocracia no governo.",
+      "imagePrompt": "Uma pessoa segurando um relógio, com uma mesa de trabalho ao fundo com documentos e papéis",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "A reforma administrativa inclui mudanças na estrutura do governo e na gestão pública.",
+      "imagePrompt": "Uma foto de uma pessoa liderando um grupo de pessoas em um auditório, com uma cidade ao fundo",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "O presidente do Congresso destacou que a reforma é um sinal de que o Brasil está caminhando para uma melhor gestão pública.",
+      "imagePrompt": "Uma pessoa falando à televisão, com um cartaz atrás dela com a palavra 'Governo Transparente'",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A reforma administrativa também inclui a criação de um órgão especializado para monitorar e controlar a despesa pública.",
+      "imagePrompt": "Uma pessoa segurando um microfone, com uma mesa de trabalho ao fundo com documentos e papéis",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

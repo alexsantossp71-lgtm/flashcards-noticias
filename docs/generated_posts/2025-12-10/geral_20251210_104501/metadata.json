@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_104501",
+  "timestamp": "2025-12-10T10:45:01.876949",
+  "category": "Geral",
+  "headline": "María Corina Machado retornará à Venezuela em breve, diz sua filha",
+  "source": "UOL",
+  "url": "https://noticias.uol.com.br/ultimas-noticias/afp/2025/12/10/maria-corina-machado-retornara-a-venezuela-em-breve-diz-sua-filha.htm",
+  "tiktokTitle": "María Corina Machado retornará à Venezuela",
+  "tiktokSummary": "A política venezuelana e ex-ministra das Relações Exteriores da União Europeia (UE) est« mais uma vez no centro dos olhos do mundo. Sua filha confirmou que ela retornará ä o seu país em breve.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://noticias.uol.com.br/ultimas-noticias/afp/2025/12/10/maria-corina-machado-retornara-a-venezuela-em-breve-diz-sua-filha.htm",
+  "cards": [
+    {
+      "text": "María Corina Machado retornará à Venezuela \nUOL",
+      "imagePrompt": "visual in English, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Fato: Sua filha confirmou que ela retornará ao seu país em breve.",
+      "imagePrompt": "visual in English, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Fato: A notícia foi divulgada em um comunicado da filha de Machado.",
+      "imagePrompt": "visual in English, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Fato: Machado se tornou uma figura polêlica importante na Venezuela e na UE.",
+      "imagePrompt": "visual in English, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Fato: A filha de Machado pediu que os venezuelanos estivessem preparados para o retorno de sua mãe.",
+      "imagePrompt": "visual in English, 3D Pixar style, colorful, vibrant, cartoon",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

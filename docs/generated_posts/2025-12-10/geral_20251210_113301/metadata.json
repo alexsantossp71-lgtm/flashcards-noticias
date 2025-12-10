@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_113301",
+  "timestamp": "2025-12-10T11:33:01.040547",
+  "category": "Geral",
+  "headline": "Cientistas descobrem nova espécie na Amazônia",
+  "source": "BBC",
+  "url": "https://bbc.com",
+  "tiktokTitle": "Descoberta de Nova Espécie na Amazónia",
+  "tiktokSummary": "Cientistas descobriram uma nova espécie no Amazonas, alegando que ela é um dos mais antigos do planeta. A descoberta foi feita em uma regióo remota da Amazónia e os cientistas estóem analisando as impressões de DNA para entender melhor a espécie. O governo brasileiro çesteou-se preparando para uma grande divulgação sobre a descoberta, mas ainda nâo foi divulgada ao público.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://bbc.com",
+  "cards": [
+    {
+      "text": "Cientistas descobrem nova espécie na Amazônia\nBBC",
+      "imagePrompt": "(María Corina Machado,:1.5), (amazônia:1.3), (uk,:1.3), professional news atmosphere, clean setting, natural professional lighting, anime style, manga, vibrant colors, detailed",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Fato 1: A espécie foi descoberta em uma região remota da Amazônia, no Brasil.",
+      "imagePrompt": "(María Corina Machado,:1.5), (amazônia:1.3), (brasil.:1.3), professional news atmosphere, clean setting, natural professional lighting, anime style, manga, vibrant colors, detailed",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Fato 2: A nova espécie é um tipo de planta endêmica, ou seja, não é encontrada em nenhum outro lugar do mundo.",
+      "imagePrompt": "(María Corina Machado,:1.5), (amazônia:1.3), (uk,:1.3), professional news atmosphere, clean setting, natural professional lighting, anime style, manga, vibrant colors, detailed",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Fato 3: Os cientistas acreditam que a espécie pode ter evoluído em isolamento durante milhões de anos.",
+      "imagePrompt": "(María Corina Machado,:1.5), (amazônia:1.3), (uk,:1.3), professional news atmosphere, clean setting, natural professional lighting, anime style, manga, vibrant colors, detailed",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Fato 4: A descoberta é considerada uma das mais importantes da década para os científicos que estudam a biodiversidade da Amazônia.",
+      "imagePrompt": "(María Corina Machado,:1.5), (amazônia:1.3), (uk,:1.3), professional news atmosphere, clean setting, natural professional lighting, anime style, manga, vibrant colors, detailed",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

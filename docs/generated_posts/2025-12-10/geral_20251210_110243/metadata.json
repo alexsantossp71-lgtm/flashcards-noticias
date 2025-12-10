@@ -1,0 +1,44 @@
+{
+  "id": "geral_20251210_110243",
+  "timestamp": "2025-12-10T11:02:43.113131",
+  "category": "Geral",
+  "headline": "SP tem maior número de mortes por dengue",
+  "source": "Folha",
+  "url": "https://www1.folha.uol.com.br/cotidiano/2025/12/sp-tem-maior-numero-de-mortes-por-dengue.shtml",
+  "tiktokTitle": "SP tem maior número de mortes por dengue",
+  "tiktokSummary": "A região metropolitana do Rio de Janeiro é a mais afetada, com 1.444 mortes registradas até o momento. A doença também é comum em outras partes da SP. Leia mais: https://www1.folha.uol.com.br/cotidiano/2025/12/sp-tem-maior-numero-de-mortes-por-dengue.shtml #Dengue #SP #Saúde #Notícias #Folha",
+  "cards": [
+    {
+      "text": "SP tem maior número de mortes por dengue\nFolha",
+      "imagePrompt": "Um mapa da SP com áreas em vermelho, mostrando a distribuição das mortes por dengue",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "1.444 mortes registradas até o momento",
+      "imagePrompt": "Uma mesa de saúde com médicos e enfermeiros trabalhando, com um relatório em frente à eles mostrando os números de mortes por dengue",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "A região metropolitana do Rio de Janeiro é a mais afetada",
+      "imagePrompt": "Um avião voando sobre a cidade do Rio de Janeiro, com uma legenda que diz 'Rio de Janeiro: 444 mortes por dengue'",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "A doença também é comum em outras partes da SP",
+      "imagePrompt": "Uma pessoa segurando um frasco de repelente de insetos, com uma legenda que diz 'Proteja-se contra a dengue em todo o estado'",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A OMS alerta sobre a crescente epidemia",
+      "imagePrompt": "Uma pessoa segurando um microscópio, com uma legenda que diz 'A OMS está monitorando a epidemia de dengue no mundo'",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}

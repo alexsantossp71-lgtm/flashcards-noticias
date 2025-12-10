@@ -1,0 +1,50 @@
+{
+  "id": "geral_20251209_205950",
+  "timestamp": "2025-12-09T20:59:50.328386",
+  "category": "Geral",
+  "headline": "Polícia Legislativa da Câmara expulsa e agride jornalistas",
+  "source": "Carta Capital",
+  "url": "https://www.cartacapital.com.br/politica/policia-legislativa-da-camara-expulsa-e-agride-jornalistas/",
+  "tiktokTitle": "Expulso, Agride! Polícia Legislativa da Câmara vai longe",
+  "tiktokSummary": "A Câmara dos Deputados aprovou projeto de lei sobre educação digital. Mas hoje foi o momento da violência: policiais legislativos agiram contra jornalistas. Veja como tudo aconteceu.",
+  "cards": [
+    {
+      "text": "Polícia Legislativa da Câmara expulsa e agride jornalistas",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Glauber Braga, do PSOL, foi expulso da Mesa Diretora por protesto ao cassar seu mandato. Policiais impediram profissionais de imprensa de acompanharem o momento.",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "O presidente da Câmara, Hugo Motta, afirmou que mandou investigar 'possíveis excessos' de agentes do Depol contra a imprensa",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Os policiais também impediram repórteres do plenário e das galerias para evitar registro do momento",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Um vídeo mostrou policiais empurrando profissionais de imprensa no Salão Verde enquanto Glauber Braga era levado pela polícia",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_5.png"
+    },
+    {
+      "text": "A situação é considerada grave e uma crítica à violência política no Brasil",
+      "imagePrompt": "",
+      "imageSource": "local",
+      "imagePath": "card_6.png"
+    }
+  ],
+  "generationTime": 0.0,
+  "modelUsed": {}
+}
