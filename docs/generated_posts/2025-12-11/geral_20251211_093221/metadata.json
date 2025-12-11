@@ -1,0 +1,42 @@
+{
+  "id": "geral_20251211_093221",
+  "timestamp": "2025-12-11T09:32:21.807656",
+  "articleDate": "2025-12-11",
+  "category": "Geral",
+  "headline": "Sabia que estacionar na frente da sua garagem dá multa? Entenda as regras",
+  "source": "UOL",
+  "url": "https://www.uol.com.br/carros/noticias/redacao/2025/12/10/pode-parar-na-frente-da-propria-garagem-entenda-por-que-da-multa.htm",
+  "tiktokTitle": "Sabia que estacionar na frente da sua garagem dá multa? Entenda as regras",
+  "tiktokSummary": "O Código de Trânsito Brasileiro proíbe estacionar o carro na frente do próprio portão, mesmo se for do próprio dono. A multa é de R$ 130,16 e a pontuação é de 4 pontos.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://www.uol.com.br/carros/noticias/redacao/2025/12/10/pode-parar-na-frente-da-propria-garagem-entenda-por-que-da-multa.htm",
+  "cards": [
+    {
+      "text": "Sabia que estacionar na frente da sua garagem dá multa? Entenda as regras\nUOL\nData: 10/12/2025",
+      "imagePrompt": "(government official announcement:1.5), (Brazilian flag:1.3), presidential palace, official meeting, serious atmosphere, watercolor painting, artistic, soft colors",
+      "imageSource": "diffusers",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Valor: A multa por estacionar na frente da garagem é de R$ 130,16",
+      "imagePrompt": "(money symbol R$:1.5), (multa:1.3), financial concept, official announcement, watercolor painting, artistic, soft colors",
+      "imageSource": "diffusers",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Percentual: Não há exceção para donos de imóveis, mesmo se estacionarem por pouco tempo",
+      "imagePrompt": "(percentage chart:1.5), (no exception:1.3), statistics, professional business setting, watercolor painting, artistic, soft colors",
+      "imageSource": "diffusers",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Cálculo: A lei não questiona quem é o dono do veículo ou da residência",
+      "imagePrompt": "(calculation formula:1.5), (no calculation:1.3), government planning, official document, watercolor painting, artistic, soft colors",
+      "imageSource": "diffusers",
+      "imagePath": "card_4.png"
+    }
+  ],
+  "generationTime": 75.92477345466614,
+  "modelUsed": {
+    "text": "Ollama",
+    "image": "SD 2.1"
+  }
+}

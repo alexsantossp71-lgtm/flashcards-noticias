@@ -1,0 +1,32 @@
+{
+  "id": "news_20251210_2_City_vence_Real_Madrid_de_virada_no_Bern",
+  "title": "City vence Real Madrid de virada no Bernabéu pela Champions",
+  "source": "Terra",
+  "url": "https://www.terra.com.br/esportes/futebol/internacional/city-vence-real-madrid-de-virada-no-bernabeu-pela-champions,974a2585e1db8b2dc5591d4ea6e0bd95qh28qzsg.html",
+  "date": "2025-12-10",
+  "timestamp": "2025-12-10T23:58:04.616045",
+  "style": "noir style, dramatic shadows, mystery atmosphere",
+  "tiktokSummary": "City vence Real Madrid de virada no Bernabéu, em uma emoção intensa na Champions.",
+  "cards": [
+    {
+      "text": "City vence Real Madrid de virada no Bernabéu pela Champions\nTerra",
+      "imagePrompt": "City vence Real Madrid de virada no Bernabéu pela Champions, noir style, dramatic shadows, mystery atmosphere",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "No dia 10 de março, o Real Madrid recebeu o Manchester City nos quartos de final da Liga dos Campeões",
+      "imagePrompt": "No dia 10 de março, o Real Madrid recebeu o Manchester City nos quartos de final da Liga dos Campeões, noir style, dramatic shadows, mystery atmosphere",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "A equipe de Pep Guardiola conquistou a vitória por 4 a 3, com golos de Rodri e Erling Haaland, após estar 2 a 0 atrás no marcador",
+      "imagePrompt": "A equipe de Pep Guardiola conquistou a vitória por 4 a 3, com golos de Rodri e Erling Haaland, após estar 2 a 0 atrás no marcador, noir style, dramatic shadows, mystery atmosphere",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Com essa vitória, o Manchester City se classificou para as semifinais da Champions, enquanto o Real Madrid foi eliminado",
+      "imagePrompt": "Com essa vitória, o Manchester City se classificou para as semifinais da Champions, enquanto o Real Madrid foi eliminado, noir style, dramatic shadows, mystery atmosphere",
+      "imagePath": "card_4.png"
+    }
+  ]
+}

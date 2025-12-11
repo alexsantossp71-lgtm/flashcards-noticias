@@ -1,0 +1,48 @@
+{
+  "id": "política_20251211_152323",
+  "timestamp": "2025-12-11T15:23:23.873894",
+  "articleDate": "2025-12-10",
+  "category": "Política",
+  "headline": "Redução de pena de Bolsonaro foi um acordo ‘com o Supremo, com tudo’ - ICL Notícias",
+  "source": "diffusers",
+  "url": "https://iclnoticias.com.br/reducao-pena-bolsonaro-acordo-supremo-com-tudo/",
+  "tiktokTitle": "Redução de pena de Bolsonaro foi um acordo ‘com o Supremo, com tudo’",
+  "tiktokSummary": "O deputado Paulinho da Força negociou com ministros do STF para reduzir a pena de Jair Bolsonaro de 6 anos e 4 meses para 3 anos e 1 mês.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://iclnoticias.com.br/reducao-pena-bolsonaro-acordo-supremo-com-tudo/",
+  "cards": [
+    {
+      "text": "Redução de pena de Bolsonaro foi um acordo ‘com o Supremo, com tudo’ - ICL Notícias\nFonte desconhecida\nData: 10/12/2025",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Paulinho da Força negociou com ministros do STF para reduzir a pena de Jair Bolsonaro",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "A redução da pena foi possível graças ao trabalho de Michel Temer",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "A redução da pena de Jair Bolsonaro é uma conquista do governo",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A redução da pena de Jair Bolsonaro foi definida pelo ministro Gilmar Mendes",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0,
+  "modelUsed": {
+    "text": "Ollama",
+    "image": "Diffusers"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "política_20251211_152821",
+  "timestamp": "2025-12-11T15:28:21.885035",
+  "articleDate": "10/12/2025",
+  "category": "Política",
+  "headline": "Manter mandato de Zambelli é “inaceitável”, dizem ministros do STF",
+  "source": "diffusers",
+  "url": "https://www.brasil247.com/brasil/manter-mandato-de-zambelli-e-inaceitavel-dizem-ministros-do-stf",
+  "tiktokTitle": "Manter mandato de Zambelli é “inaceitável”, dizem ministros do STF",
+  "tiktokSummary": "A Câmara dos Deputados preservou o mandato da deputada Carla Zambelli (PL-SP) apesar de 227 parlamentares votarem a favor da cassação. Os ministros do Supremo Tribunal Federal consideram que isso é uma afronta ao Judiciário e um gesto de desmoralização da Corte.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://www.brasil247.com/brasil/manter-mandato-de-zambelli-e-inaceitavel-dizem-ministros-do-stf",
+  "cards": [
+    {
+      "text": "Manter mandato de Zambelli é “inaceitável”, dizem ministros do STF\nFonte desconhecida\nData: [2025-12-10]",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "A Câmara dos Deputados votou contra a cassação da deputada Carla Zambelli (PL-SP) por 257 a 227",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Os ministros do Supremo Tribunal Federal consideram que a Câmara agiu de forma inaceitável e desrespeitou a ordem da Corte",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "A deputada Carla Zambelli foi condenada por participação na invasão do sistema do Conselho Nacional de Justiça (CNJ)",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Ela recebeu pena de dez anos de prisão e perdeu o mandato por oito anos",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0,
+  "modelUsed": {
+    "text": "Ollama",
+    "image": "Diffusers"
+  }
+}

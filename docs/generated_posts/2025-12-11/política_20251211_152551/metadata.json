@@ -1,0 +1,48 @@
+{
+  "id": "política_20251211_152551",
+  "timestamp": "2025-12-11T15:25:51.845172",
+  "articleDate": "10/12/2025",
+  "category": "Política",
+  "headline": "Senado aprova PL Antifacção com penas que podem chegar a 120 anos - ICL Notícias",
+  "source": "diffusers",
+  "url": "https://iclnoticias.com.br/senado-aprova-pl-antifaccao-com-penas-que-podem/",
+  "tiktokTitle": "Senado aprova PL Antifacção com penas que podem chegar a 120 anos",
+  "tiktokSummary": "O Senado aprovou o projeto PL Antifacção, que aumenta as penas para integrantes de grupos criminosos. Os líderes podem receber condenações de até 60 anos, enquanto os chefes de facções e milícias cumprirão pena obrigatoriamente em presídios federais de segurança máxima.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://iclnoticias.com.br/senado-aprova-pl-antifaccao-com-penas-que-podem/",
+  "cards": [
+    {
+      "text": "Senado aprova PL Antifacção com penas que podem chegar a 120 anos - ICL Notícias\nFonte desconhecida\nData: 10/12/2025",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Valor: Penas que podem chegar a 120 anos para integrantes de grupos criminosos",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "Percentual: Líderes podem receber condenações de até 60 anos",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "Cálculo: Chefes de facções e milícias cumprirão pena em presídios federais de segurança máxima",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "Impacto: Mais rígidas as regras de progressão de regime e controle armado",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0,
+  "modelUsed": {
+    "text": "Ollama",
+    "image": "Diffusers"
+  }
+}

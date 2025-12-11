@@ -1,0 +1,48 @@
+{
+  "id": "política_20251211_152052",
+  "timestamp": "2025-12-11T15:20:52.321893",
+  "articleDate": "10/12/2025",
+  "category": "Política",
+  "headline": "Perfis de Lula e políticos de esquerda somem das buscas do Instagram; entenda",
+  "source": "diffusers",
+  "url": "https://gcmais.com.br/jornalismo/2025/12/10/perfis-de-lula-e-politicos-de-esquerda-somem-das-buscas-do-instagram-entenda/",
+  "tiktokTitle": "Perfis de Lula e políticos de esquerda somem das buscas do Instagram; entenda",
+  "tiktokSummary": "O presidente Luiz Inácio Lula da Silva (PT) e diversos outros políticos de esquerda tiveram seus perfis removidos das buscas do Instagram, alegando que o problema está sendo corrigido. A questão surge no mesmo dia em que a Câmara dos Deputados aprovou o PL da Dosimetria, projeto que reduz penas de condenados pelos atos golpistas do 8 de janeiro.\n\n#Notícias #Brasil #Urgente #Hoje #News\n\n🔗 Leia mais: https://gcmais.com.br/jornalismo/2025/12/10/perfis-de-lula-e-politicos-de-esquerda-somem-das-buscas-do-instagram-entenda/",
+  "cards": [
+    {
+      "text": "Perfis de Lula e políticos de esquerda somem das buscas do Instagram; entenda\nFonte desconhecida",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_1.png"
+    },
+    {
+      "text": "Projeto PL da Dosimetria aprovado pela Câmara dos Deputados reduz penas de condenados por atos golpistas do 8 de janeiro",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_2.png"
+    },
+    {
+      "text": "O PL da Dosimetria foi aprovado em madrugada desta quarta-feira (10) sem votação",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_3.png"
+    },
+    {
+      "text": "A questão surge no mesmo dia em que o projeto foi aprovado",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_4.png"
+    },
+    {
+      "text": "A Meta não se pronunciou oficialmente sobre a situação",
+      "imagePrompt": "",
+      "imageSource": "diffusers",
+      "imagePath": "card_5.png"
+    }
+  ],
+  "generationTime": 0,
+  "modelUsed": {
+    "text": "Ollama",
+    "image": "Diffusers"
+  }
+}
